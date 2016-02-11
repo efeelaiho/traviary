@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <array name="country_flags">
+
+    </array>
+
+    <string-array
+        name="country_names">
+        <item>Australia</item>
+
+    </string-array>
+
+
+</resources>

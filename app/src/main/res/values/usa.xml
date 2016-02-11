@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="state_flags">
+
+    </array>
+
+    <string-array
+        name="state_names">
+        
+
+    </string-array>
+
+</resources>
