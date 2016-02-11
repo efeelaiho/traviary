@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#26A69A</color>
+    <color name="colorPrimary2">#3F51B5</color>
+    <color name="colorPrimaryDark">#26A69A</color>
+    <color name="colorPrimaryDark2">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="googleRed">#DC4E41</color>
+    <color name="teal">#26A69A</color>
+    <color name="purp">#7E57C2</color>
+</resources>
