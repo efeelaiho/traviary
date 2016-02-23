@@ -5,4 +5,44 @@ android:layout_height="fill_parent"
 android:gravity="center_horizontal" >
 
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/Tennessee"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/Texas"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/NewYork"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/Hawaii"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/California"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        />
 </LinearLayout>
