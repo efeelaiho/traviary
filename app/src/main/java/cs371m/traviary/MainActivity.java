@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.view.MenuItem;
 
 import java.util.HashMap;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
+
+    private Toolbar toolbar;
 
     /* Did the user sign out?*/
     private boolean log_off;
