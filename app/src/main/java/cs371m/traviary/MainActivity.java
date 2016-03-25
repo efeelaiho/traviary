@@ -11,9 +11,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.HashMap;
+
 public class MainActivity extends Activity {
 
+    /* Did the user sign out?*/
     private boolean log_off;
+
+    private HashMap<String,Boolean> countries;
+    private HashMap<String,Boolean> states;
+    private HashMap<String,Boolean> challenges;
+
+
 
 
     @Override
