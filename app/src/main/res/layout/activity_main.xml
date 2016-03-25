@@ -37,13 +37,6 @@
         android:layout_marginLeft="25dp"
         />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/_hawaii"
-        android:layout_gravity="left"
-        android:layout_marginLeft="25dp"
-        />
 
     <ImageView
         android:layout_width="50dp"
