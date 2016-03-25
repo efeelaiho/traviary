@@ -3,7 +3,7 @@
     <string name="app_name_lowercase">traviary</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Traviary</string>
-
+    
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

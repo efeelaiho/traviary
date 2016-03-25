@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -32,6 +33,16 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Attaching the layout to the toolbar object */
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
+        /*
+        this will be how we change our title when switching views
+        getSupportActionBar().setTitle("My title");
+        */
+
         log_off = true;
         if (log_off) {
             Intent login_intent = new Intent(this,LoginActivity.class);
