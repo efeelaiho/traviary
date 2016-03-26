@@ -45,6 +45,8 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
+        int icons[] = {R.drawable.home_icon_teal_dark, R.drawable.usa_icon_teal_dark, R.drawable.globe_icon_teal_dark,
+                        R.drawable.challenges_icon_teal_dark, R.drawable.settings_icon_teal_dark};
 
 
 
@@ -59,8 +61,9 @@ public class MainActivity extends ActionBarActivity {
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-        tabs.setDistributeEvenly(false);
+        tabs.setDistributeEvenly(true);
 
+        tabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
         // Setting Custom Color for the Scroll bar indicator of the Tab View
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
@@ -78,8 +81,8 @@ public class MainActivity extends ActionBarActivity {
                     public void onPageSelected(int position) {
                         // TODO Auto-generated method stub
 
-
                         getSupportActionBar().setTitle(Titles[position]);
+
                     }
 
                     @Override

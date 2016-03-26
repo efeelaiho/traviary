@@ -1,11 +1,19 @@
 package cs371m.traviary;
 
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 
 
 /**
@@ -15,19 +23,21 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-    Toolbar t;
+    private Context con;
 
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, MainActivity m) {
+    public ViewPagerAdapter(FragmentManager fm,CharSequence mTitles[], int mNumbOfTabsumb, Context c) {
         super(fm);
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
-
-
+        this.con = c;
 
     }
+
+    private int icons[] = {R.drawable.home_icon_teal_dark, R.drawable.usa_icon_teal_dark, R.drawable.globe_icon_teal_dark,
+            R.drawable.challenges_icon_teal_dark, R.drawable.settings_icon_teal_dark};
 
     //This method return the fragment for the every position in the View Pager
     @Override
@@ -57,16 +67,18 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         }
 
-
-
-
     }
 
     // This method return the titles for the Tabs in the Tab Strip
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return Titles[position];
+        Drawable drawable = con.getResources().getDrawable(icons[position]);
+        drawable.setBounds(0,0,80,80);
+        ImageSpan imageSpan = new ImageSpan(drawable);
+        SpannableString spannableString = new SpannableString(" ");
+        spannableString.setSpan(imageSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString;
     }
 
     // This method return the Number of tabs for the tabs Strip
@@ -75,4 +87,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return NumbOfTabs;
     }
+
+
 }
