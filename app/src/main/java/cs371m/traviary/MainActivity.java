@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,12 @@ import java.util.HashMap;
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
+    protected ViewPagerAdapter vp_adapter;
+    SlidingTabLayout tabs;
+    ViewPager vp_pager;
+    CharSequence Titles[]={"Home","USA","World","Location", "Challenges","Settings"};
+    int Numboftabs = 6;
+
 
     /* Did the user sign out?*/
     private boolean log_off;
@@ -42,6 +49,24 @@ public class MainActivity extends ActionBarActivity {
         this will be how we change our title when switching views
         getSupportActionBar().setTitle("My title");
         */
+        vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        vp_pager = (ViewPager) findViewById(R.id.pager);
+        vp_pager.setAdapter(vp_adapter);
+
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.white);
+            }
+        });
+
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(vp_pager);
 
         log_off = true;
         if (log_off) {

@@ -49,7 +49,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             default:
                 Home home_frag = new Home();
                 return home_frag;
-            
+
         }
 
 
