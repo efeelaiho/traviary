@@ -36,8 +36,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-    private int icons[] = {R.drawable.home_icon_teal_dark, R.drawable.usa_icon_teal_dark, R.drawable.globe_icon_teal_dark,
-            R.drawable.challenges_icon_teal_dark, R.drawable.settings_icon_teal_dark};
+    private int icons[] = {R.drawable.home_accent, R.drawable.usa_accent, R.drawable.globe_accent,
+            R.drawable.challenges_accent};
 
     //This method return the fragment for the every position in the View Pager
     @Override

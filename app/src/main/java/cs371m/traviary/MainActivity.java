@@ -22,8 +22,8 @@ public class MainActivity extends ActionBarActivity {
     protected ViewPagerAdapter vp_adapter;
     SlidingTabLayout tabs;
     ViewPager vp_pager;
-    CharSequence Titles[]={"Home","USA","World","Challenges", "Settings"};
-    int Numboftabs = 5;
+    CharSequence Titles[]={"Home","USA","World","Challenges"};
+    int Numboftabs = 4;
 
 
     /* Did the user sign out?*/
@@ -45,22 +45,15 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
-        int icons[] = {R.drawable.home_icon_teal_dark, R.drawable.usa_icon_teal_dark, R.drawable.globe_icon_teal_dark,
-                        R.drawable.challenges_icon_teal_dark, R.drawable.settings_icon_teal_dark};
 
 
-
-        /*
-        this will be how we change our title when switching views
-        getSupportActionBar().setTitle("My title");
-        */
         vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, this);
         vp_pager = (ViewPager) findViewById(R.id.pager);
         vp_pager.setAdapter(vp_adapter);
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        // To make the Tabs Fixed set this true
         tabs.setDistributeEvenly(true);
 
         tabs.setCustomTabView(R.layout.custom_tab_view, R.id.tabText);
