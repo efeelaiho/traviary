@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#f8f8f8"
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
@@ -17,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/white"
+        />
 
 
 
