@@ -8,6 +8,14 @@
     <string name="world_title">World</string>
     <string name="challenges_title">Challenges</string>
 
+    <string-array name="tabs">
+        <item>TAB 1</item>
+        <item>TAB 2</item>
+        <item>TAB 3</item>
+        <item>TAB 4</item>
+        <item>TAB 5</item>
+    </string-array>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

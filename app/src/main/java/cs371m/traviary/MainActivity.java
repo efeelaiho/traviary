@@ -22,8 +22,8 @@ public class MainActivity extends ActionBarActivity {
     protected ViewPagerAdapter vp_adapter;
     SlidingTabLayout tabs;
     ViewPager vp_pager;
-    CharSequence Titles[]={"Home","USA","World","Location", "Challenges","Settings"};
-    int Numboftabs = 6;
+    CharSequence Titles[]={"Home","USA","World","Challenges", "Settings"};
+    int Numboftabs = 5;
 
 
     /* Did the user sign out?*/
@@ -44,18 +44,22 @@ public class MainActivity extends ActionBarActivity {
         /* Attaching the layout to the toolbar object */
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
+
+
 
         /*
         this will be how we change our title when switching views
         getSupportActionBar().setTitle("My title");
         */
-        vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, this);
         vp_pager = (ViewPager) findViewById(R.id.pager);
         vp_pager.setAdapter(vp_adapter);
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        tabs.setDistributeEvenly(false);
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
@@ -67,6 +71,29 @@ public class MainActivity extends ActionBarActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(vp_pager);
+
+        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        // TODO Auto-generated method stub
+
+
+                        getSupportActionBar().setTitle(Titles[position]);
+                    }
+
+                    @Override
+                    public void onPageScrolled(int arg0, float arg1, int arg2) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int pos) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
 
         log_off = true;
         if (log_off) {
@@ -97,5 +124,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void changeTitle(String s) {
+        getSupportActionBar().setTitle(s);
     }
 }
