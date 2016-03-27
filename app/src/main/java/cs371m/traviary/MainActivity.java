@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     protected ViewPagerAdapter vp_adapter;
     SlidingTabLayout tabs;
     ViewPager vp_pager;
-    CharSequence Titles[]={"Home","USA","World","Challenges"};
+    private CharSequence Titles[]={"Home","United States","World","Challenges"};
     int Numboftabs = 4;
 
 

@@ -58,9 +58,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 4:
                 Challenges challenges_frag = new Challenges();
                 return challenges_frag;
-            case 5:
-                Settings settings_frag = new Settings();
-                return settings_frag;
             default:
                 Home home_frag = new Home();
                 return home_frag;
