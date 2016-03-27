@@ -20,21 +20,13 @@ public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
     protected ViewPagerAdapter vp_adapter;
-    SlidingTabLayout tabs;
-    ViewPager vp_pager;
-    private CharSequence Titles[]={"Home","United States","World","Challenges"};
-    int Numboftabs = 4;
-
+    private SlidingTabLayout tabs;
+    private ViewPager vp_pager;
+    private CharSequence Titles[]= {"Home","United States","World","Challenges"};
+    private int Numboftabs = 4;
 
     /* Did the user sign out?*/
     private boolean log_off;
-
-    private HashMap<String,Boolean> countries;
-    private HashMap<String,Boolean> states;
-    private HashMap<String,Boolean> challenges;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +36,8 @@ public class MainActivity extends ActionBarActivity {
         /* Attaching the layout to the toolbar object */
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(Titles[0]);
+
 
 
         vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, this);

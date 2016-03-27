@@ -9,11 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 /**
  * Created by efosaelaiho on 3/25/16.
  */
 public class UnitedStates extends Fragment {
-    
+
+    private HashMap<String,Boolean> states;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
