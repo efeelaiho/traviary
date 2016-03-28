@@ -8,16 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by efosaelaiho on 3/25/16.
  */
 public class World extends Fragment {
 
-    protected String user_name;
-
-
-    private HashMap<String,Boolean> countries;
+    private TreeMap<String,Boolean> countries;
 
 
     @Override
@@ -28,6 +26,8 @@ public class World extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.world,container,false);
+        MainActivity mainActivity = (MainActivity)getActivity();
+        countries = mainActivity.getStates();
         return v;
     }
 }

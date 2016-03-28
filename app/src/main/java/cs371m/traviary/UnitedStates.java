@@ -10,13 +10,14 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by efosaelaiho on 3/25/16.
  */
 public class UnitedStates extends Fragment {
 
-    private HashMap<String,Boolean> states;
+    private TreeMap<String,Boolean> states;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,9 +27,8 @@ public class UnitedStates extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.usa,container,false);
-        //MainActivity m = (MainActivity)getActivity();
-        TextView textView = (TextView)v.findViewById(R.id.rex);
-        textView.setText("hello America");
+        MainActivity mainActivity = (MainActivity)getActivity();
+        states = mainActivity.getStates();
 
         return v;
     }

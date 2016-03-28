@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -28,9 +29,9 @@ public class MainActivity extends ActionBarActivity {
     /* Did the user sign out?*/
     private boolean log_off;
 
-    private HashMap<String,Boolean> states;
-    private HashMap<String,Boolean> countries;
-    private HashMap<String,Boolean> challenges;
+    private TreeMap<String,Boolean> states;
+    private TreeMap<String,Boolean> countries;
+    private TreeMap<String,Boolean> challenges;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
                         // TODO Auto-generated method stub
 
                         getSupportActionBar().setTitle(Titles[position]);
-                        
+
                     }
 
                     @Override
@@ -121,17 +122,30 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    /* Getter methods to retrieve Hashmaps for individual fragments (Home, United States, World..etc.) */
+    /* Getter methods to retrieve HashMaps for individual fragments (Home, United States, World..etc.) */
 
-    public HashMap getStates() {
+    public TreeMap getStates() {
         return states;
     }
 
-    public HashMap getCountries() {
+    public TreeMap getCountries() {
         return countries;
     }
 
-    public HashMap getChallenges() {
+    public TreeMap getChallenges() {
         return challenges;
+    }
+
+    /* Setter methods to put keys and values into HashMaps for OnCreate*/
+    public void setStates(TreeMap<String, Boolean> hm) {
+
+    }
+
+    public void setCountries(TreeMap<String, Boolean> hm) {
+
+    }
+
+    public void setChallenges(TreeMap<String, Boolean> hm) {
+
     }
 }

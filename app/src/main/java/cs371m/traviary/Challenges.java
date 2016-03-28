@@ -8,13 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by efosaelaiho on 3/25/16.
  */
 public class Challenges extends Fragment {
 
-    private HashMap<String,Boolean> challenges;
+    private TreeMap<String,Boolean> challenges;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class Challenges extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.challenges,container,false);
+        MainActivity mainActivity = (MainActivity)getActivity();
+        challenges = mainActivity.getStates();
         return v;
     }
 }
