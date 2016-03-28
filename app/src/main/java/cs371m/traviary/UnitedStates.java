@@ -26,8 +26,9 @@ public class UnitedStates extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.usa,container,false);
+        //MainActivity m = (MainActivity)getActivity();
         TextView textView = (TextView)v.findViewById(R.id.rex);
-        textView.setText("Americccccaaaa!!!!!");
+        textView.setText("hello America");
 
         return v;
     }

@@ -28,10 +28,15 @@ public class MainActivity extends ActionBarActivity {
     /* Did the user sign out?*/
     private boolean log_off;
 
+    private HashMap<String,Boolean> states;
+    private HashMap<String,Boolean> countries;
+    private HashMap<String,Boolean> challenges;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         /* Attaching the layout to the toolbar object */
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -54,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.logoPink);
+                return getResources().getColor(R.color.purp);
             }
         });
 
@@ -68,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
                         // TODO Auto-generated method stub
 
                         getSupportActionBar().setTitle(Titles[position]);
-
+                        
                     }
 
                     @Override
@@ -115,7 +120,18 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeTitle(String s) {
-        getSupportActionBar().setTitle(s);
+
+    /* Getter methods to retrieve Hashmaps for individual fragments (Home, United States, World..etc.) */
+
+    public HashMap getStates() {
+        return states;
+    }
+
+    public HashMap getCountries() {
+        return countries;
+    }
+
+    public HashMap getChallenges() {
+        return challenges;
     }
 }
