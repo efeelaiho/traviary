@@ -5,16 +5,12 @@
     android:layout_height="match_parent"
     >
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/recycler_view"
+        >
 
-    <TextView
-        android:id="@+id/rex"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="54dp"
-        android:layout_height="wrap_content"
-        android:text="You Are In USA Tab"
-        android:textSize="34sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
