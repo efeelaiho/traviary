@@ -5,7 +5,7 @@ package cs371m.traviary.datastructures;
  */
 public class State {
 
-    private String name;
+    String name;
 
     public State(String name) {
         this.name = name;
