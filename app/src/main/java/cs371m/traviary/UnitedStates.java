@@ -1,6 +1,8 @@
 package cs371m.traviary;
 
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,16 +52,18 @@ public class UnitedStates extends Fragment {
     }
 
     // ***** remove when TreeMap and database is implemented *****
+    // ***** DUMMY DATA INITALIZATION *****
     private void initializeData() {
         stateTempList = new ArrayList<>();
-        stateTempList.add(new State("Alaska"));
-        stateTempList.add(new State("Colorado"));
-        stateTempList.add(new State("Florida"));
-        stateTempList.add(new State("Hawaii"));
-        stateTempList.add(new State("Massachusetts"));
-        stateTempList.add(new State("Nevada"));
-        stateTempList.add(new State("New York"));
-        stateTempList.add(new State("Texas"));
+        Resources resource = getResources();
+        String[] stateNames = resource.getStringArray(R.array.state_names);
+        for (String state : stateNames) {
+            state = state.replaceAll("\\s+",""); // remove all white spaces
+            String mDrawableName = "_" + state.toLowerCase();
+            int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
+            boolean visited = true;
+            stateTempList.add(new State(state, visited, resId));
+        }
     }
 
     private void initializeAdapter(){
