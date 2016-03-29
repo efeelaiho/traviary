@@ -6,9 +6,11 @@ package cs371m.traviary.datastructures;
 public class State {
 
     String name;
+    boolean visited;
 
-    public State(String name) {
+    public State(String name, boolean visited) {
         this.name = name;
+        this.visited = visited;
     }
 
 }

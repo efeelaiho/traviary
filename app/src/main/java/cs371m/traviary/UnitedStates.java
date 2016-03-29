@@ -52,8 +52,13 @@ public class UnitedStates extends Fragment {
     // ***** remove when TreeMap and database is implemented *****
     private void initializeData() {
         stateTempList = new ArrayList<>();
+        stateTempList.add(new State("Alaska"));
         stateTempList.add(new State("Colorado"));
+        stateTempList.add(new State("Florida"));
+        stateTempList.add(new State("Hawaii"));
         stateTempList.add(new State("Massachusetts"));
+        stateTempList.add(new State("Nevada"));
+        stateTempList.add(new State("New York"));
         stateTempList.add(new State("Texas"));
     }
 
