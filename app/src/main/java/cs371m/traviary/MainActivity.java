@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    /* Getter methods to retrieve HashMaps for individual fragments (Home, United States, World..etc.) */
+    /* Getter methods to retrieve TreeMaps for individual fragments (Home, United States, World..etc.) */
 
     public TreeMap getStates() {
         return states;
@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
         return challenges;
     }
 
-    /* Setter methods to put keys and values into HashMaps for OnCreate*/
+    /* Setter methods to put keys and values into TreeMaps for OnCreate*/
     public void setStates(TreeMap<String, Boolean> hm) {
 
     }
