@@ -31,4 +31,18 @@
         completions."
     </string>
     <string name="sign_google">"Sign In With Google"</string>
+
+
+
+<!-- Challenges -->
+<string-array name= "challenge_strings">
+
+    <item>Pablo Escobar</item> <!-- Go to Colombia -->
+    <item>Lewis and Clark</item> <!-- Go to all 50 states -->
+    <item>Interview</item> <!-- North Korea -->
+
+
+
+</string-array>
+
 </resources>

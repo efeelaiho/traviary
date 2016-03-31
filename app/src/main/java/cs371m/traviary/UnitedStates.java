@@ -62,7 +62,9 @@ public class UnitedStates extends Fragment {
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
             boolean visited = true;
-            stateTempList.add(new State(state, visited, resId));
+            int checked_resId = resource.getIdentifier("checked", "drawable", getActivity().getPackageName());
+            int unchecked_resId = resource.getIdentifier("unchecked", "drawable", getActivity().getPackageName());
+            stateTempList.add(new State(state, visited, resId, checked_resId, unchecked_resId));
         }
     }
 

@@ -25,12 +25,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.StateViewH
         CardView cardView;
         TextView stateName;
         ImageView stateImage;
+        ImageView stateCheck;
 
         public StateViewHolder(View itemView) {
             super(itemView);
             cardView = (CardView)itemView.findViewById(R.id.cv);
             stateName = (TextView)itemView.findViewById(R.id.state_name);
             stateImage = (ImageView)itemView.findViewById(R.id.state_photo);
+            stateCheck = (ImageView)itemView.findViewById(R.id.state_check);
         }
 
     }
@@ -59,6 +61,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.StateViewH
         stateViewHolder.stateName.setText(states.get(i).name);
         int imageId = states.get(i).photoId;
         stateViewHolder.stateImage.setImageResource(imageId);
+
+        /* adding checkbox images */
+
+        if (states.get(i).visited) {
+            stateViewHolder.stateCheck.setImageResource(states.get(i).checkedId);
+        } else {
+            stateViewHolder.stateCheck.setImageResource(states.get(i).unchecked_Id);
+        }
     }
 
     @Override

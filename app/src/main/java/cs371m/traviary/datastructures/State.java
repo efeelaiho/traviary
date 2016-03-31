@@ -8,11 +8,15 @@ public class State {
     String name;
     boolean visited;
     int photoId;
+    int checkedId;
+    int unchecked_Id;
 
-    public State(String name, boolean visited, int photoId) {
+    public State(String name, boolean visited, int photoId, int checkedId, int unchecked_Id) {
         this.name = name;
         this.visited = visited;
         this.photoId = photoId;
+        this.unchecked_Id = unchecked_Id;
+        this.checkedId = checkedId;
     }
 
 }

@@ -25,7 +25,7 @@ public class World extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.world,container,false);
+        View v = inflater.inflate(R.layout.world,container,false);
         MainActivity mainActivity = (MainActivity)getActivity();
         countries = mainActivity.getStates();
         return v;
