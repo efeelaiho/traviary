@@ -53,11 +53,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 World world_frag = new World();
                 return world_frag;
             case 3:
-                Location location_frag = new Location();
-                return location_frag;
-            case 4:
                 Challenges challenges_frag = new Challenges();
                 return challenges_frag;
+            case 4:
+                Location location_frag = new Location();
+                return location_frag;
             default:
                 Home home_frag = new Home();
                 return home_frag;
