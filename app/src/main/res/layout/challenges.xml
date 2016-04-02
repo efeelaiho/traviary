@@ -6,8 +6,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You are in the Challenges tab."
-        android:id="@+id/textView" />
+        android:text="Challenges"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textSize="26sp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_height="match_parent"

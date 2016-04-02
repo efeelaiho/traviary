@@ -40,6 +40,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     /*
      * Insert a new state onto the SQLite database file / device
+     * This will happen when a new state's location has been logged
      */
     public long insertState(String stateName) {
         SQLiteDatabase db = this.getWritableDatabase();
