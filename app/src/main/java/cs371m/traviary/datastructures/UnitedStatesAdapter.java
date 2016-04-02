@@ -1,8 +1,5 @@
 package cs371m.traviary.datastructures;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +15,7 @@ import cs371m.traviary.R;
 /**
  * Created by Jong Hoon Lim on 3/29/2016.
  */
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.StateViewHolder> {
+public class UnitedStatesAdapter extends RecyclerView.Adapter<UnitedStatesAdapter.StateViewHolder> {
 
     public static class StateViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,7 +26,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.StateViewH
 
         public StateViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.cv);
+            cardView = (CardView)itemView.findViewById(R.id.state_cv);
             stateName = (TextView)itemView.findViewById(R.id.state_name);
             stateImage = (ImageView)itemView.findViewById(R.id.state_photo);
             stateCheck = (ImageView)itemView.findViewById(R.id.state_check);
@@ -38,9 +35,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.StateViewH
     }
 
     List<State> states;
-    Context context;
 
-    public CustomAdapter(List<State> states) {
+    public UnitedStatesAdapter(List<State> states) {
         this.states = states;
     }
 

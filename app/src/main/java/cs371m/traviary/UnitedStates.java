@@ -1,28 +1,22 @@
 package cs371m.traviary;
 
 
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
-import cs371m.traviary.datastructures.CustomAdapter;
+import cs371m.traviary.datastructures.UnitedStatesAdapter;
 import cs371m.traviary.datastructures.State;
 
 /**
@@ -43,7 +37,7 @@ public class UnitedStates extends Fragment {
         MainActivity mainActivity = (MainActivity)getActivity();
         states = mainActivity.getStates();
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView)v.findViewById(R.id.usa_rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
@@ -85,7 +79,7 @@ public class UnitedStates extends Fragment {
     }
 
     private void initializeAdapter(){
-        CustomAdapter adapter = new CustomAdapter(stateTempList);
+        UnitedStatesAdapter adapter = new UnitedStatesAdapter(stateTempList);
         recyclerView.setAdapter(adapter);
     }
 
