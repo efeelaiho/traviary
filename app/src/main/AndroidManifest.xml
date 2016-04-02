@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cs371m.traviary">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -7,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk tools:node="merge" android:minSdkVersion="17" android:targetSdkVersion="23" />
 
     <application
         android:allowBackup="true"
