@@ -73,7 +73,7 @@ public class UnitedStates extends Fragment {
             state = state.replaceAll("\\s+",""); // remove all white spaces
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
-            boolean visited = true;
+            boolean visited = false;
             int checked_resId = resource.getIdentifier("checked", "drawable", getActivity().getPackageName());
             int unchecked_resId = resource.getIdentifier("unchecked", "drawable", getActivity().getPackageName());
             stateTempList.add(new State(originalState, visited, resId, checked_resId, unchecked_resId));
