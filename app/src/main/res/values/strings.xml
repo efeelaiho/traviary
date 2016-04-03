@@ -33,18 +33,25 @@
     <string name="sign_google">"Sign In With Google"</string>
 
 
+    <!-- Challenges -->
+    <string-array name="challenge_strings">
 
-<!-- Challenges -->
-<string-array name= "challenge_strings">
+        <item>Pablo Escobar</item>
+        <!-- Go to Colombia -->
+        <item>Lewis and Clark</item>
+        <!-- Go to all 50 states -->
+        <item>The Interview</item>
+        <!-- North Korea -->
+        <item>Lord of the Rings</item>
+        <!-- New Zealand -->
+        <item>League of Legends / K-Pop</item>
+        <!-- South Korea -->
+        <item>Hello World!</item>
+        <!-- Be logged in to your first location! -->
+        <item>Conor McGregor</item>
+        <!-- Ireland -->
 
-    <item>Pablo Escobar</item> <!-- Go to Colombia -->
-    <item>Lewis and Clark</item> <!-- Go to all 50 states -->
-    <item>The Interview</item> <!-- North Korea -->
-    <item>Lord of the Rings</item> <!-- New Zealand -->
-    <item>League of Legends / K-Pop</item> <!-- South Korea -->
-    <item>Hello World!</item> <!-- Be logged in to your first location! -->
-    <item>Conor McGregor</item> <!-- Ireland -->
-
-</string-array>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
