@@ -1,5 +1,7 @@
 package cs371m.traviary.datastructures;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,9 +37,13 @@ public class UnitedStatesAdapter extends RecyclerView.Adapter<UnitedStatesAdapte
     }
 
     List<State> states;
+    Context context;
+    int checkedResId;
+    int uncheckedResId;
 
-    public UnitedStatesAdapter(List<State> states) {
+    public UnitedStatesAdapter(List<State> states, Context context) {
         this.states = states;
+        this.context = context;
     }
 
     @Override
@@ -54,16 +60,20 @@ public class UnitedStatesAdapter extends RecyclerView.Adapter<UnitedStatesAdapte
 
     @Override
     public void onBindViewHolder(StateViewHolder stateViewHolder, int i) {
+        Resources resource = context.getResources();
         stateViewHolder.stateName.setText(states.get(i).name);
         int imageId = states.get(i).photoId;
         stateViewHolder.stateImage.setImageResource(imageId);
 
+        checkedResId = resource.getIdentifier("checked", "drawable", context.getPackageName());
+        uncheckedResId = resource.getIdentifier("unchecked", "drawable", context.getPackageName());
+
         /* adding checkbox images */
 
         if (states.get(i).visited) {
-            stateViewHolder.stateCheck.setImageResource(states.get(i).checkedId);
+            stateViewHolder.stateCheck.setImageResource(checkedResId);
         } else {
-            stateViewHolder.stateCheck.setImageResource(states.get(i).unchecked_Id);
+            stateViewHolder.stateCheck.setImageResource(uncheckedResId);
         }
     }
 

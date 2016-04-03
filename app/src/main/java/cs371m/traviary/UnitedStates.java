@@ -74,14 +74,13 @@ public class UnitedStates extends Fragment {
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
             boolean visited = false;
-            int checked_resId = resource.getIdentifier("checked", "drawable", getActivity().getPackageName());
-            int unchecked_resId = resource.getIdentifier("unchecked", "drawable", getActivity().getPackageName());
-            stateTempList.add(new State(originalState, visited, resId, checked_resId, unchecked_resId));
+            stateTempList.add(new State(originalState, visited, resId));
         }
+        stateTempList.get(2).visited = true; // TESTING: ARIZONA SHOULD BE CHECKED
     }
 
     private void initializeAdapter(){
-        UnitedStatesAdapter adapter = new UnitedStatesAdapter(stateTempList);
+        UnitedStatesAdapter adapter = new UnitedStatesAdapter(stateTempList, getContext());
         recyclerView.setAdapter(adapter);
     }
 

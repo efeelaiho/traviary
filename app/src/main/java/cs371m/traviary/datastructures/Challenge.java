@@ -5,9 +5,9 @@ package cs371m.traviary.datastructures;
  */
 public class Challenge {
 
-    String name;
-    boolean completed;
-    String description;
+    public String name;
+    public boolean completed;
+    public String description;
 
     public Challenge(String name, boolean completed, String description) {
 

@@ -5,18 +5,15 @@ package cs371m.traviary.datastructures;
  */
 public class State {
 
-    String name;
-    boolean visited;
-    int photoId;
-    int checkedId;
-    int unchecked_Id;
+    public String name;
+    public boolean visited;
+    public int photoId;
 
-    public State(String name, boolean visited, int photoId, int checkedId, int unchecked_Id) {
+    public State(String name, boolean visited, int photoId) {
         this.name = name;
         this.visited = visited;
         this.photoId = photoId;
-        this.unchecked_Id = unchecked_Id;
-        this.checkedId = checkedId;
+
     }
 
 }
