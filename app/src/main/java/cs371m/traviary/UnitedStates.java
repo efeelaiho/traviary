@@ -1,8 +1,8 @@
 package cs371m.traviary;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,18 +24,20 @@ import cs371m.traviary.datastructures.State;
  */
 public class UnitedStates extends Fragment {
 
-    private TreeMap<String,Boolean> states;
-
     // ***** remove when TreeMap and database is implemented *****
     private List<State> stateTempList;
 
     private RecyclerView recyclerView;
 
+    private Resources resource;
+    private String[] stateNames;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.usa,container,false);
-        MainActivity mainActivity = (MainActivity)getActivity();
-        states = mainActivity.getStates();
+
+        resource = getResources();
+        stateNames = resource.getStringArray(R.array.state_names);
 
         recyclerView = (RecyclerView)v.findViewById(R.id.usa_rv);
 
@@ -46,12 +48,15 @@ public class UnitedStates extends Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                LocationViewer fragment = new LocationViewer();
-                fragment.setLocationBeingViewed(getResources().getStringArray(R.array.state_names)[position]);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fl, fragment)
-                        .commit();
+//                LocationViewer fragment = new LocationViewer();
+//                fragment.setLocationBeingViewed(getResources().getStringArray(R.array.state_names)[position]);
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.fl, fragment)
+//                        .commit();
+                Intent stateIntent = new Intent(getContext(), StateActivity.class);
+                stateIntent.putExtra("name", stateNames[position]);
+                startActivity(stateIntent);
             }
         });
 
@@ -65,8 +70,6 @@ public class UnitedStates extends Fragment {
     // ***** DUMMY DATA INITALIZATION *****@
     private void initializeData() {
         stateTempList = new ArrayList<>();
-        Resources resource = getResources();
-        String[] stateNames = resource.getStringArray(R.array.state_names);
         String originalState;
         for (String state : stateNames) {
             originalState = state;
