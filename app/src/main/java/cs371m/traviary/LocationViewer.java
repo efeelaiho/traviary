@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,22 +22,32 @@ import android.webkit.WebViewClient;
 /**
  * Created by Hunter on 3/31/16.
  */
-public class LocationViewer extends Fragment {
+public class LocationViewer extends ActionBarActivity {
 
     // Progress Dialog
     private ProgressDialog pDialog;
 
     private WebView webview;
-    private String locationBeingViewed = "";
+    private String locationBeingViewed;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.location_viewer);
 
-        pDialog = ProgressDialog.show(getContext(), "", "Please wait while the Wikipedia page for " + locationBeingViewed + " loads...", true);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if (extras == null)
+                locationBeingViewed = null;
+            else
+                locationBeingViewed = extras.getString("name");
+        }
+        else {
+            locationBeingViewed = (String) savedInstanceState.getSerializable("name");
+        }
 
-        View v = inflater.inflate(R.layout.location_viewer, container, false);
-
-        webview = (WebView) v.findViewById(R.id.webview);
+        pDialog = ProgressDialog.show(LocationViewer.this, "", "Please wait while the Wikipedia page for " + locationBeingViewed + " loads...", true);
+        webview = (WebView) findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -46,16 +57,13 @@ public class LocationViewer extends Fragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                pDialog.dismiss();
+                if (pDialog != null && pDialog.isShowing()) {
+                    pDialog.dismiss();
+                }
             }
         });
         webview.loadUrl("https://en.wikipedia.org/wiki/" + locationBeingViewed);
 
-        return v;
-    }
-
-    public void setLocationBeingViewed(String l) {
-        locationBeingViewed = l;
     }
 
 }
