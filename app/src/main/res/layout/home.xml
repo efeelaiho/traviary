@@ -7,10 +7,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="16sp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
         android:text="You Are In Home Tab"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-
+    <Button
+        android:id="@+id/location_button"
+        android:text="LOG MY LOCATION"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/location_button_design"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        />
 </LinearLayout>

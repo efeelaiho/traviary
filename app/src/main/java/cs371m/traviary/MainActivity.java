@@ -97,6 +97,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
+
     }
 
     @Override
@@ -147,5 +148,10 @@ public class MainActivity extends ActionBarActivity {
 
     public void setChallenges(TreeMap<String, Boolean> hm) {
 
+    }
+
+    public void getLocation(){
+        Intent maps_intent = new Intent(this, MapsActivity.class);
+        startActivity(maps_intent);
     }
 }
