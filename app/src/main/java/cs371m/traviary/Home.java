@@ -1,6 +1,7 @@
 package cs371m.traviary;
 
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,14 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home,container,false);
+        final MainActivity mainActivity = (MainActivity)getActivity();
         mLocationButton = (Button)v.findViewById(R.id.location_button);
         mAttractionButton = (Button)v.findViewById(R.id.attraction_button);
 
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // go to MapsActivity
+                mainActivity.getLocation();
             }
         });
 
