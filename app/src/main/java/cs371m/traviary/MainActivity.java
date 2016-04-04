@@ -69,43 +69,43 @@ public class MainActivity extends ActionBarActivity {
 
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-                    @Override
-                    public void onPageSelected(int position) {
-                        // Resets US tab
-                        if(position == 1) {
-                            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.usa_rv);
-                            if(fragment != null) {
-                                Fragment f = getSupportFragmentManager().findFragmentById(R.id.webview);
-                                if(f != null)
-                                    getSupportFragmentManager().beginTransaction().remove(f).commit();
-                                f = getSupportFragmentManager().findFragmentById(R.id.fl);
-                                if(f != null) {
-                                    FragmentManager fragmentManager = getSupportFragmentManager();
-                                    fragmentManager.beginTransaction()
-                                            .replace(R.id.fl, fragment)
-                                            .commit();
-                                }
-                            }
-                            getSupportActionBar().setTitle(Titles[position]);
+            @Override
+            public void onPageSelected(int position) {
+                // Resets US tab
+                if (position == 1) {
+                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.usa_rv);
+                    if (fragment != null) {
+                        Fragment f = getSupportFragmentManager().findFragmentById(R.id.webview);
+                        if (f != null)
+                            getSupportFragmentManager().beginTransaction().remove(f).commit();
+                        f = getSupportFragmentManager().findFragmentById(R.id.fl);
+                        if (f != null) {
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.fl, fragment)
+                                    .commit();
                         }
                     }
+                }
+                getSupportActionBar().setTitle(Titles[position]);
+            }
 
-                    @Override
-                    public void onPageScrolled(int arg0, float arg1, int arg2) {
-                        // TODO Auto-generated method stub
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+                // TODO Auto-generated method stub
 
-                    }
+            }
 
-                    @Override
-                    public void onPageScrollStateChanged(int pos) {
-                        // TODO Auto-generated method stub
+            @Override
+            public void onPageScrollStateChanged(int pos) {
+                // TODO Auto-generated method stub
 
                     }
                 });
 
         log_off = true;
         if (log_off) {
-            Intent login_intent = new Intent(this,LoginActivity.class);
+            Intent login_intent = new Intent(this, LoginActivity.class);
             startActivity(login_intent);
         }
 
