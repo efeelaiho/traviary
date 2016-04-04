@@ -2,6 +2,8 @@ package cs371m.traviary;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.*;
+import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -14,12 +16,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
     LatLng myPosition;
+    String currentCity;
+    String currentState;
+    String currentCountry;
 
     /**
      * Request code for location permission request.
@@ -38,9 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
     }
-
 
     /**
      * Manipulates the map once available.
@@ -53,14 +61,55 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        mMap.setOnMyLocationButtonClickListener(this);
+//        enableMyLocation();
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//                == PackageManager.PERMISSION_GRANTED) {
+//            mMap.setMyLocationEnabled(true);
+//        } else {
+//            // Show rationale and request permission.
+//        }
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        //mMap.setOnMyLocationButtonClickListener(this);
-        //enableMyLocation();
+        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                currentCity = "";
+                currentState = "";
+                currentCountry = "";
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
+                try {
+                    /* get the city, state (if applicable), country */
+                    List<Address> addresses = geoCoder.getFromLocation(latitude, longitude, 1);
+                    if (addresses.size() > 0) {
+                        currentCity += addresses.get(0).getLocality();
+                        currentState += addresses.get(0).getAdminArea();
+                        currentCountry += addresses.get(0).getCountryName();
+                    }
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                LatLng currentLocation = new LatLng(latitude, longitude);
+                mMap.addMarker(new MarkerOptions().position(currentLocation).title
+                        ("Marker in " + currentCity + ", " + currentState + ", " + currentCountry));
+                if(mMap != null){
+                    /* move the camera to current location */
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 6.0f));
+                }
+            }
+        });
+        mMap.setOnMyLocationButtonClickListener(this);
+        enableMyLocation();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
