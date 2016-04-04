@@ -19,6 +19,7 @@ import java.util.TreeMap;
 
 import cs371m.traviary.datastructures.UnitedStatesAdapter;
 import cs371m.traviary.datastructures.State;
+import cs371m.traviary.temp.SQLiteHelper;
 
 /**
  * Created by efosaelaiho on 3/25/16.
@@ -74,7 +75,9 @@ public class UnitedStates extends Fragment {
             boolean visited = false;
             stateTempList.add(new State(originalState, visited, resId));
         }
-        stateTempList.get(2).visited = true; // TESTING: ARIZONA SHOULD BE CHECKED
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(getContext()); // ERROR CHECKING
+        System.out.println(sqLiteHelper.getAllStatesRecords()); // DEBUG PRINT ALL RECORDS
+
     }
 
     public void p() {

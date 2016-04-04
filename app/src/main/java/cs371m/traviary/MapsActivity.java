@@ -2,6 +2,7 @@ package cs371m.traviary;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.*;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import cs371m.traviary.temp.SQLiteHelper;
 
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -78,6 +81,11 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                         currentCity += addresses.get(0).getLocality(); // city
                         currentState += addresses.get(0).getAdminArea(); // state
                         currentCountry += addresses.get(0).getCountryName(); // country
+                        /* log the current state to location */
+                        if (logState(currentState) == -1)
+                            System.out.println("Not logged.");
+                        else
+                            System.out.println(currentState + " successfully logged.");
                     }
                 }
                 catch (IOException e) {
@@ -105,6 +113,16 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
         } else {
             // Show rationale and request permission.
         }
+    }
+
+    /*
+     * save the current state to database
+     */
+    public long logState(String currentState) {
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+        long success = sqLiteHelper.insertState(currentState);
+        sqLiteHelper.close();
+        return success;
     }
 
     @Override

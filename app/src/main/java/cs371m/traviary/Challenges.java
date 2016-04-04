@@ -58,8 +58,6 @@ public class Challenges extends Fragment {
         for (String challenge : challengeNames) {
             challengesTempList.add(new Challenge(challenge, false, ""));
         }
-        challengesTempList.get(3).completed = true; // TESTING: LORD OF THE RINGS SHOULD BE CHECKED
-
     }
 
     private void initializeAdapter() {
