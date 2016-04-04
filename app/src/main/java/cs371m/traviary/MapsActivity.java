@@ -82,10 +82,13 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                         currentState += addresses.get(0).getAdminArea(); // state
                         currentCountry += addresses.get(0).getCountryName(); // country
                         /* log the current state to location */
-                        if (logState(currentState) == -1)
+                        if (logState(currentState) == -1) {
                             System.out.println("Not logged.");
-                        else
+                            Toast.makeText(MapsActivity.this, currentState + " has already been logged. Failure.", Toast.LENGTH_LONG).show();
+                        } else {
                             System.out.println(currentState + " successfully logged.");
+                            Toast.makeText(MapsActivity.this, currentState + " has been logged successfully.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
                 catch (IOException e) {

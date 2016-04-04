@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.HashSet;
+
 /**
  * Created by Jong Hoon Lim on 3/30/2016.
  */
@@ -99,6 +101,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.close();
 
         return tableString;
+    }
+
+    public HashSet<String> getVisitedStates() {
+        HashSet<String> visitedStates = new HashSet<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor allRows  = db.rawQuery("SELECT * FROM " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME, null);
+        if (allRows.moveToFirst() ){
+            do {
+                visitedStates.add(allRows.getString(1)); // get state name for current row
+            } while (allRows.moveToNext());
+        }
+        db.close();
+        return visitedStates;
     }
 
 }
