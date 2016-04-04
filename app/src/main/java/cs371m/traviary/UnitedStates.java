@@ -67,17 +67,16 @@ public class UnitedStates extends Fragment {
     private void initializeData() {
         stateTempList = new ArrayList<>();
         String originalState;
+        SQLiteHelper db = new SQLiteHelper(getContext());
         for (String state : stateNames) {
+            boolean exists = db.checkState(state);
             originalState = state;
             state = state.replaceAll("\\s+",""); // remove all white spaces
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
-            boolean visited = false;
-            stateTempList.add(new State(originalState, visited, resId));
+            stateTempList.add(new State(originalState, exists, resId));
         }
-        SQLiteHelper sqLiteHelper = new SQLiteHelper(getContext()); // ERROR CHECKING
-        System.out.println(sqLiteHelper.getAllStatesRecords()); // DEBUG PRINT ALL RECORDS
-
+        db.close();
     }
 
     public void p() {
