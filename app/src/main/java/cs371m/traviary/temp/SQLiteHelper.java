@@ -107,7 +107,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         HashSet<String> visitedStates = new HashSet<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor allRows  = db.rawQuery("SELECT * FROM " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME, null);
-        if (allRows.moveToFirst() ){
+        if (allRows.moveToFirst() ){ // will return true if query returned at least 1 row
             do {
                 visitedStates.add(allRows.getString(1)); // get state name for current row
             } while (allRows.moveToNext());
