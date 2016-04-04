@@ -3,6 +3,7 @@ package cs371m.traviary;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -137,6 +138,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -165,6 +171,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             focusView = mPasswordView;
             cancel = true;
         }
+
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
