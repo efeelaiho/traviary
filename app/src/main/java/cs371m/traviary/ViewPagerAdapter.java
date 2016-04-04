@@ -43,7 +43,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-
         switch (position) {
 
             case 1:

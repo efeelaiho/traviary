@@ -44,6 +44,7 @@ public class UnitedStates extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
+
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -80,6 +81,10 @@ public class UnitedStates extends Fragment {
             stateTempList.add(new State(originalState, visited, resId));
         }
         stateTempList.get(2).visited = true; // TESTING: ARIZONA SHOULD BE CHECKED
+    }
+
+    public void p() {
+        Log.d("d", "onH");
     }
 
     private void initializeAdapter(){
