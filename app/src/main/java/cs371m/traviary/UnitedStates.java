@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,13 +49,6 @@ public class UnitedStates extends Fragment {
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
-//                LocationViewer fragment = new LocationViewer();
-//                fragment.setLocationBeingViewed(getResources().getStringArray(R.array.state_names)[position]);
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.fl, fragment)
-//                        .commit();
                 Intent stateIntent = new Intent(getContext(), StateActivity.class);
                 stateIntent.putExtra("name", stateNames[position]);
                 startActivity(stateIntent);

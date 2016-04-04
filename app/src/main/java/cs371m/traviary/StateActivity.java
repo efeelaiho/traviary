@@ -1,6 +1,5 @@
 package cs371m.traviary;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -40,6 +39,7 @@ public class StateActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(stateName);
 
         wikipedia = (Button) findViewById(R.id.wikipedia);
+        wikipedia.setText(stateName + " Wikipedia");
         wikipedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
