@@ -16,7 +16,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -26,7 +25,6 @@ import java.util.Locale;
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
-    LatLng myPosition;
     String currentCity;
     String currentState;
     String currentCountry;
@@ -61,20 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        mMap.setOnMyLocationButtonClickListener(this);
-//        enableMyLocation();
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            mMap.setMyLocationEnabled(true);
-//        } else {
-//            // Show rationale and request permission.
-//        }
+
         mMap = googleMap;
 
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
@@ -90,9 +75,9 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                     /* get the city, state (if applicable), country */
                     List<Address> addresses = geoCoder.getFromLocation(latitude, longitude, 1);
                     if (addresses.size() > 0) {
-                        currentCity += addresses.get(0).getLocality();
-                        currentState += addresses.get(0).getAdminArea();
-                        currentCountry += addresses.get(0).getCountryName();
+                        currentCity += addresses.get(0).getLocality(); // city
+                        currentState += addresses.get(0).getAdminArea(); // state
+                        currentCountry += addresses.get(0).getCountryName(); // country
                     }
                 }
                 catch (IOException e) {
@@ -100,8 +85,12 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                 }
 
                 LatLng currentLocation = new LatLng(latitude, longitude);
-                mMap.addMarker(new MarkerOptions().position(currentLocation).title
-                        ("Marker in " + currentCity + ", " + currentState + ", " + currentCountry));
+                if (currentState != null) // location has an "admin area" (state)
+                    mMap.addMarker(new MarkerOptions().position(currentLocation).title
+                            ("Marker in " + currentCity + ", " + currentState + ", " + currentCountry));
+                else // location does not have an "admin area" (state)
+                    mMap.addMarker(new MarkerOptions().position(currentLocation).title
+                            ("Marker in " + currentCity + ", " + currentCountry));
                 if(mMap != null){
                     /* move the camera to current location */
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 6.0f));
