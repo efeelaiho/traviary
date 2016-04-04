@@ -28,6 +28,18 @@ public class Home extends Fragment {
         mLocationButton = (Button)v.findViewById(R.id.location_button);
         mAttractionButton = (Button)v.findViewById(R.id.attraction_button);
 
+        mLocationButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // go to MapsActivity
+            }
+        });
+
+        mAttractionButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                // I guess it will launch Google places API
+            }
+        });
         return v;
     }
 }
