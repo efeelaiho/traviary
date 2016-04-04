@@ -43,8 +43,6 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(Titles[0]);
 
-
-
         vp_adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, this);
         vp_pager = (ViewPager) findViewById(R.id.pager);
         vp_pager.setAdapter(vp_adapter);
