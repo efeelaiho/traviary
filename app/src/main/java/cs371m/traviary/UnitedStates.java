@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -66,15 +67,17 @@ public class UnitedStates extends Fragment {
     // ***** DUMMY DATA INITALIZATION *****@
     private void initializeData() {
         stateTempList = new ArrayList<>();
-        String originalState;
         SQLiteHelper db = new SQLiteHelper(getContext());
+        HashSet<String> visitedStates = db.getVisitedStates(); // get all states that user has visited
         for (String state : stateNames) {
-            boolean exists = db.checkState(state);
-            originalState = state;
             state = state.replaceAll("\\s+",""); // remove all white spaces
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
-            stateTempList.add(new State(originalState, exists, resId));
+            boolean visited = false;
+            if (visitedStates.contains(state)) { // check whether state exists in HashSet
+                visited = true;
+            }
+            stateTempList.add(new State(state, visited, resId));
         }
         db.close();
     }
