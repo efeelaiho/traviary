@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:layout_gravity="center_horizontal"
         android:text="You Are In Home Tab"
         android:layout_centerVertical="true"
@@ -25,6 +26,22 @@
         android:background="@drawable/location_button_design"
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        />
+
+
+    <Button
+        android:id="@+id/attraction_button"
+        android:text="FIND ATTRACTIONS"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/attraction_button_design"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:layout_margin="10dp"
         android:shadowDy="0"
         android:shadowRadius="5"
         />
