@@ -11,7 +11,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="40dp"
         android:layout_gravity="center_horizontal"
-        android:text="You Are In Home Tab"
+        android:text="Press the Log My Location Button"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -30,6 +30,16 @@
         android:shadowRadius="5"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Find Attractions is for Beta Release"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/attraction_button"

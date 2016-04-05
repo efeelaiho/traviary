@@ -28,3 +28,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.google.android.gms:play-services:8.4.0'
 }
+
