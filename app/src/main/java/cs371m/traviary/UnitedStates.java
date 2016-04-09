@@ -69,15 +69,17 @@ public class UnitedStates extends Fragment {
         stateTempList = new ArrayList<>();
         SQLiteHelper db = new SQLiteHelper(getContext());
         HashSet<String> visitedStates = db.getVisitedStates(); // get all states that user has visited
+        String stateWithSpace;
         for (String state : stateNames) {
+            stateWithSpace = state;
             state = state.replaceAll("\\s+",""); // remove all white spaces
             String mDrawableName = "_" + state.toLowerCase();
             int resId = resource.getIdentifier(mDrawableName, "drawable", getActivity().getPackageName());
             boolean visited = false;
-            if (visitedStates.contains(state)) { // check whether state exists in HashSet
+            if (visitedStates.contains(stateWithSpace)) { // check whether state exists in HashSet
                 visited = true;
             }
-            stateTempList.add(new State(state, visited, resId));
+            stateTempList.add(new State(stateWithSpace, visited, resId));
         }
         db.close();
     }

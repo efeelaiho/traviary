@@ -72,6 +72,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onPageSelected(int position) {
                 // Resets US tab
+
+
                 if (position == 1) {
                     Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.usa_rv);
                     if (fragment != null) {
