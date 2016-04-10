@@ -71,24 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageSelected(int position) {
-                // Resets US tab
 
-
-                if (position == 1) {
-                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.usa_rv);
-                    if (fragment != null) {
-                        Fragment f = getSupportFragmentManager().findFragmentById(R.id.webview);
-                        if (f != null)
-                            getSupportFragmentManager().beginTransaction().remove(f).commit();
-                        f = getSupportFragmentManager().findFragmentById(R.id.fl);
-                        if (f != null) {
-                            FragmentManager fragmentManager = getSupportFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.fl, fragment)
-                                    .commit();
-                        }
-                    }
-                }
                 getSupportActionBar().setTitle(Titles[position]);
             }
 
