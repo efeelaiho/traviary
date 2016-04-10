@@ -8,14 +8,6 @@
     <string name="world_title">World</string>
     <string name="challenges_title">Challenges</string>
 
-    <string-array name="tabs">
-        <item>TAB 1</item>
-        <item>TAB 2</item>
-        <item>TAB 3</item>
-        <item>TAB 4</item>
-        <item>TAB 5</item>
-    </string-array>
-
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -31,9 +23,16 @@
         completions."
     </string>
     <string name="sign_google">"Sign In With Google"</string>
+    <string name="title_activity_maps">Map</string>
+
 
 
     <!-- Challenges -->
+    <!-- Challenges --><!-- Challenges -->
+    <!-- Challenges --><!-- Challenges --><!-- Challenges -->
+    <!-- Challenges --><!-- Challenges --><!-- Challenges --><!-- Challenges -->
+    <!-- Challenges --><!-- Challenges --><!-- Challenges --><!-- Challenges --><!-- Challenges -->
+
     <string-array name="challenge_strings">
 
         <item>Pablo Escobar</item>
@@ -50,8 +49,38 @@
         <!-- Be logged in to your first location! -->
         <item>Conor McGregor</item>
         <!-- Ireland -->
+        <item>Deep in the Heart of ...</item>
+        <item>Daisy Dukes, Bikinis on Top</item>
+        <item>Going Down Under</item>
+        <item>Concrete Jungle</item>
+        <item>Kon'nichiwa</item>
+        <item>Eiffel Tower</item>
+        <item>The Great Wall</item>
+        <item>Mother Russia</item>
 
     </string-array>
-    <string name="title_activity_maps">Map</string>
+
+    <string-array name="challenge_detail_strings">
+        <item>Log In Colombia</item>
+        <item>Go to all 50 states in the US</item>
+        <item>Secret</item>
+        <item>Log In New Zealand</item>
+        <item>Log In South Korea</item>
+        <item>Log into your first location</item>
+        <item>Log In Ireland</item>
+        <item>Log In Texas</item>
+        <item>Log In California</item>
+        <item>Log In Australia</item>
+        <item>Log In New York</item>
+        <item>Log In Japan</item>
+        <item>Log In France</item>
+        <item>Log In China</item>
+        <item>Log In Russia</item>
+
+    </string-array>
+
+
+
+
 
 </resources>
