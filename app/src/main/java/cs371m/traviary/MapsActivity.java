@@ -25,7 +25,8 @@ import java.util.Locale;
 
 import cs371m.traviary.temp.SQLiteHelper;
 
-public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener,
+        OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private GoogleMap mMap;
     String currentCity;
@@ -73,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                 currentCountry = "";
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+                System.out.println("latitude: " + latitude + " / longtitude : " + longitude);
                 Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
                 try {
                     /* get the city, state (if applicable), country */

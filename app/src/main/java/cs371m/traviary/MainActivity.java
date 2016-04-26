@@ -148,8 +148,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+//    public void getLocation(){
+//        Intent maps_intent = new Intent(this, MapsActivity.class);
+//        startActivity(maps_intent);
+//    }
     public void getLocation(){
-        Intent maps_intent = new Intent(this, MapsActivity.class);
-        startActivity(maps_intent);
+        Intent mapsIntent = new Intent(this, MyLocationActivity.class);
+        startActivity(mapsIntent);
     }
 }
