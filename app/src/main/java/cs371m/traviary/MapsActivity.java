@@ -32,7 +32,7 @@ import java.util.Locale;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import cs371m.traviary.temp.SQLiteHelper;
+import cs371m.traviary.database.SQLiteHelper;
 
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback
         ,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -107,6 +107,16 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
     public long logState(String currentState) {
         SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
         long success = sqLiteHelper.insertState(currentState);
+        sqLiteHelper.close();
+        return success;
+    }
+
+    /*
+     * save the current state to database
+     */
+    public long logCountry(String currentCountry) {
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+        long success = sqLiteHelper.insertCountry(currentCountry);
         sqLiteHelper.close();
         return success;
     }
@@ -259,7 +269,11 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                 location = city + ", " + state + ", " + country;
             }
             System.out.println(location);
-            long success = logState(state);
+            long success;
+            if (logState(state) == -1 || logCountry(country) == -1)
+                success = -1;
+            else
+                success = 1;
             return success;
         }
 

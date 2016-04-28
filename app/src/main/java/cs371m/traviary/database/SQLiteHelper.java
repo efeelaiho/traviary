@@ -1,11 +1,10 @@
-package cs371m.traviary.temp;
+package cs371m.traviary.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.HashSet;
 
@@ -18,27 +17,39 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COMMA = ", ";
     public static final String DATABASE_NAME = "traviary.db";
     // create table "states"
-    private static final String SQL_CREATE_ENTRIES =
+    private static final String CREATE_STATES =
             "CREATE TABLE " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
                     FeedReaderContract.FeedEntry.STATES_COLUMN_STATE_NAME + TEXT_TYPE + COMMA +
                     FeedReaderContract.FeedEntry.STATES_COLUMN_VISITED + TEXT_TYPE +
                     ")";
-    private static final String SQL_DELETE_ENTRIES =
+    private static final String DELETE_STATES =
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME;
+
+    // create table "countries"
+    private static final String CREATE_COUNTRIES =
+            "CREATE TABLE " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME + " (" +
+                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedEntry.COUNTRIES_COLUMN_COUNTRY_NAME + TEXT_TYPE + COMMA +
+                    FeedReaderContract.FeedEntry.COUNTRIES_COLUMN_VISITED + TEXT_TYPE +
+                    ")";
+    private static final String DELETE_COUNTRIES =
+            "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(CREATE_STATES);
+        db.execSQL(CREATE_COUNTRIES);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
-        db.execSQL(SQL_DELETE_ENTRIES);
+        db.execSQL(DELETE_STATES);
+        db.execSQL(DELETE_COUNTRIES);
         onCreate(db);
     }
 
@@ -60,6 +71,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return -1;
     }
 
+    public long insertCountry(String countryName) {
+        if (!checkCountry(countryName)) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(FeedReaderContract.FeedEntry.COUNTRIES_COLUMN_COUNTRY_NAME, countryName);
+            contentValues.put(FeedReaderContract.FeedEntry.COUNTRIES_COLUMN_VISITED, "Y");
+            long rowInserted = db.insert(FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME, null, contentValues);
+            // close the database
+            db.close();
+            return rowInserted;
+        }
+        return -1;
+    }
+
     public boolean checkState(String currentState) {
         Cursor c = null;
         SQLiteDatabase db = null;
@@ -68,6 +93,29 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             String query = "select * from " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME +
                     " where " + FeedReaderContract.FeedEntry.STATES_COLUMN_STATE_NAME + " = ?";
             c = db.rawQuery(query, new String[] {currentState});
+            if (c.moveToFirst()) {
+                return true;
+            }
+            return false;
+        }
+        finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+    public boolean checkCountry(String currentCountry) {
+        Cursor c = null;
+        SQLiteDatabase db = null;
+        try {
+            db = this.getReadableDatabase();
+            String query = "select * from " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME +
+                    " where " + FeedReaderContract.FeedEntry.COUNTRIES_COLUMN_COUNTRY_NAME + " = ?";
+            c = db.rawQuery(query, new String[] {currentCountry});
             if (c.moveToFirst()) {
                 return true;
             }
@@ -114,6 +162,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
         db.close();
         return visitedStates;
+    }
+
+    public HashSet<String> getVisitedCountries() {
+        HashSet<String> visitedCountries = new HashSet<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor allRows  = db.rawQuery("SELECT * FROM " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME, null);
+        if (allRows.moveToFirst() ){ // will return true if query returned at least 1 row
+            do {
+                visitedCountries.add(allRows.getString(1)); // get state name for current row
+            } while (allRows.moveToNext());
+        }
+        db.close();
+        return visitedCountries;
     }
 
 }
