@@ -29,9 +29,6 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence Titles[]= {"Home","United States","World","Challenges"};
     private int Numboftabs = 4;
 
-    /* Did the user sign out?*/
-    private boolean log_off;
-
     private TreeMap<String,Boolean> states;
     private TreeMap<String,Boolean> countries;
     private TreeMap<String,Boolean> challenges;
@@ -88,11 +85,6 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
 
-        log_off = true;
-        if (log_off) {
-            Intent login_intent = new Intent(this, LoginActivity.class);
-            startActivity(login_intent);
-        }
 
 
 

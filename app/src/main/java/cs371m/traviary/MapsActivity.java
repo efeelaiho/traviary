@@ -137,6 +137,9 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                     mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
                     mapFragment.getMapAsync(this);
+                    if (googleApiClient == null) {
+                        googleApiClient = new GoogleApiClient.Builder(this, this, this).addApi(LocationServices.API).build();
+                    }
                 } else {
                     Toast.makeText(this, "Traviary needs your location", Toast.LENGTH_SHORT).show();
                 }
