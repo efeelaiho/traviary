@@ -93,6 +93,9 @@ public class UnitedStates extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    /*
+     * Refresh the RecyclerView after resuming fragment (after logging location)
+     */
     @Override
     public void onResume() {
         super.onResume();
