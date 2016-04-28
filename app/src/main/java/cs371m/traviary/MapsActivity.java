@@ -1,11 +1,13 @@
 package cs371m.traviary;
 
 import android.Manifest;
-import android.content.pm.ActivityInfo;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.*;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -30,7 +32,7 @@ import java.util.Locale;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import cs371m.traviary.temp.SQLiteHelper;
+import cs371m.traviary.database.SQLiteHelper;
 
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback
         ,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -45,6 +47,8 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int PERMISSION_ACCESS_COARSE_LOCATION = 1;
 
+    // Progress Dialog
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -103,6 +107,16 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
     public long logState(String currentState) {
         SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
         long success = sqLiteHelper.insertState(currentState);
+        sqLiteHelper.close();
+        return success;
+    }
+
+    /*
+     * save the current state to database
+     */
+    public long logCountry(String currentCountry) {
+        SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
+        long success = sqLiteHelper.insertCountry(currentCountry);
         sqLiteHelper.close();
         return success;
     }
@@ -197,6 +211,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                     System.out.println("CURRENT CITY: " + currentCity); // ***** DEBUG *****
                     System.out.println("CURRENT STATE: " + currentState); // ***** DEBUG *****
                     System.out.println("CURRENT COUNTRY: " + currentCountry); // ***** DEBUG *****
+                    new LogStateTask(MapsActivity.this).execute(currentCity, currentState, currentCountry);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -220,6 +235,73 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Log.i(MainActivity.class.getSimpleName(), "Can't connect to Google Play Services!");
+    }
+
+    private class LogStateTask extends AsyncTask<String, String, Long> {
+
+        private String country;
+        private String state;
+        private String city;
+        String location;
+        Context context;
+
+        public LogStateTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MapsActivity.this);
+            StringBuilder message = new StringBuilder("Attempting to log your location...");
+            pDialog.setMessage(message);
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Long doInBackground(String... params) {
+            this.city = params[0];
+            this.state = params[1];
+            this.country = params[2];
+            if (state == null) { // not United States
+                location = city + ", " + country;
+            }
+            else { // user in United States
+                location = city + ", " + state + ", " + country;
+            }
+            System.out.println(location);
+            long success;
+            if (logState(state) == -1 || logCountry(country) == -1)
+                success = -1;
+            else
+                success = 1;
+            return success;
+        }
+
+        @Override
+        protected void onPostExecute(Long success) {
+            super.onPostExecute(success);
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+            if (success == -1) { // failure to log... already visited!
+                System.out.println(location);
+                new AlertDialog.Builder(this.context)
+                        .setTitle("FAILURE")
+                        .setMessage("You have already logged " + location + ".")
+                        .setNeutralButton("Close", null)
+                        .show();
+            }
+            else {
+                new AlertDialog.Builder(this.context)
+                        .setTitle("SUCCESS")
+                        .setMessage("You have successfully logged " + location + ".")
+                        .setNeutralButton("Close", null)
+                        .show();
+            }
+        }
+
     }
 
 }

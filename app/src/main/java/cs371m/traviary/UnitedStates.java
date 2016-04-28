@@ -16,18 +16,16 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.TreeMap;
 
 import cs371m.traviary.datastructures.UnitedStatesAdapter;
 import cs371m.traviary.datastructures.State;
-import cs371m.traviary.temp.SQLiteHelper;
+import cs371m.traviary.database.SQLiteHelper;
 
 /**
  * Created by efosaelaiho on 3/25/16.
  */
 public class UnitedStates extends Fragment {
 
-    // ***** remove when TreeMap and database is implemented *****
     private List<State> stateTempList;
 
     private RecyclerView recyclerView;
@@ -63,8 +61,6 @@ public class UnitedStates extends Fragment {
         return v;
     }
 
-    // ***** remove when TreeMap and database is implemented *****
-    // ***** DUMMY DATA INITALIZATION *****@
     private void initializeData() {
         stateTempList = new ArrayList<>();
         SQLiteHelper db = new SQLiteHelper(getContext());
@@ -84,13 +80,18 @@ public class UnitedStates extends Fragment {
         db.close();
     }
 
-    public void p() {
-        Log.d("d", "onH");
-    }
-
     private void initializeAdapter(){
         UnitedStatesAdapter adapter = new UnitedStatesAdapter(stateTempList, getContext());
         recyclerView.setAdapter(adapter);
     }
 
+    /*
+     * Refresh the RecyclerView after resuming fragment (after logging location)
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeData();
+        initializeAdapter();
+    }
 }
