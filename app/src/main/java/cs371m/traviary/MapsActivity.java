@@ -4,9 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.*;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -251,9 +249,9 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
 
         @Override
         protected Long doInBackground(String... params) {
-            city = params[0];
-            state = params[1];
-            country = params[2];
+            this.city = params[0];
+            this.state = params[1];
+            this.country = params[2];
             if (state == null) { // not United States
                 location = city + ", " + country;
             }
