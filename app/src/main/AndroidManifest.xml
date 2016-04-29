@@ -64,6 +64,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".LocationViewer"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".CountryActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

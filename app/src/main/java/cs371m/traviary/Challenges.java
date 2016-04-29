@@ -51,7 +51,6 @@ public class Challenges extends Fragment {
     }
 
     private void initializeData() {
-
         challengesTempList = new ArrayList<Challenge>();
         Resources resource = getResources();
         String[] challengeNames = resource.getStringArray(R.array.challenge_strings);

@@ -269,7 +269,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
                 location = city + ", " + country;
             }
             else { // user in United States
-                location = city + ", " + state + ", " + country;
+                location = state + ", " + country;
             }
             System.out.println(location);
             long success;
@@ -288,7 +288,7 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
             if (success == -1) { // failure to log... already visited!
                 System.out.println(location);
                 new AlertDialog.Builder(this.context)
-                        .setTitle("FAILURE")
+                        .setTitle("")
                         .setMessage("You have already logged " + location + ".")
                         .setNeutralButton("Close", null)
                         .show();
