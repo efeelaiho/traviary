@@ -28,7 +28,6 @@ import cs371m.traviary.datastructures.ChallengesAdapter;
  */
 public class Challenges extends Fragment {
 
-    private TreeMap<String,Boolean> challenges;
     private RecyclerView recyclerView;
     private List<Challenge> challengesTempList;
 

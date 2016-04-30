@@ -12,4 +12,9 @@
         android:layout_height="match_parent"
         tools:context="cs371m.traviary.MapsActivity" />
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"
+        ></include>
+
 </FrameLayout>
