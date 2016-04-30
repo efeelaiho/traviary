@@ -51,11 +51,15 @@ public class Challenges extends Fragment {
     }
 
     private void initializeData() {
-        challengesTempList = new ArrayList<Challenge>();
+        // name, completed, description, points worth
+        challengesTempList = new ArrayList<>();
         Resources resource = getResources();
         String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
-        for (String challenge : challengeNames) {
-            challengesTempList.add(new Challenge(challenge, false, ""));
+        String[] challengeDescriptions = resource.getStringArray(R.array.challenge_detail_strings);
+        int[] challengePointsWorth = resource.getIntArray(R.array.challenge_worth);
+        for (int index = 0; index < challengeNames.length; index++) {
+            challengesTempList.add(new Challenge(index, challengeNames[index], false,
+                    challengeDescriptions[index], challengePointsWorth[index]));
         }
     }
 

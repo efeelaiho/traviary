@@ -81,8 +81,26 @@
         <item>Log In France</item>
         <item>Log In China</item>
         <item>Log In Russia</item>
-
     </string-array>
+    
+    <integer-array name="challenge_worth">
+        <item>2000</item>
+        <item>25000</item>
+        <item>100000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+
+    </integer-array>
 
 
     <!--    Permissions    -->

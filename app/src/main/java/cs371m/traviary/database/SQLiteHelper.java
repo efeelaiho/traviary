@@ -198,4 +198,42 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return count;
     }
 
+
+    /*
+     * Since we can access the challenges points worth by int array, check challenges via a switch case
+     */
+    private boolean checkChallengeCompleted(int caseNumber) {
+        switch(caseNumber) {
+            case 0: // Columbia
+                break;
+            case 1: // All 50 states
+                break;
+            case 2: // Secret: North Korea
+                break;
+            case 4: // South Korea
+                break;
+            case 5: // Hello World
+                break;
+            case 6: // Ireland
+                break;
+            case 7: // Texas
+                break;
+            case 8: // California
+                break;
+            case 9: // Australia
+                break;
+            case 10: // New York
+                break;
+            case 11: // Japan
+                break;
+            case 12: // France
+                break;
+            case 13: // China
+                break;
+            case 14: // MOTHER RUSSIA
+                break;
+        }
+        return false;
+    }
+
 }
