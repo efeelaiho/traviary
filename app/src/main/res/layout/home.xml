@@ -3,17 +3,29 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+        android:text="1000"
+        android:textSize="130sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/score"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Press the Log My Location Button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:text="States Visited: 0 out of 50"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/states_stats"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:text="Countries Visited: 0 out of 280?"
+        android:textSize="25sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/country_stats"/>
 
     <Button
         android:id="@+id/location_button"
@@ -30,16 +42,6 @@
         android:shadowRadius="5"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Find Attractions is for Beta Release"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/attraction_button"
