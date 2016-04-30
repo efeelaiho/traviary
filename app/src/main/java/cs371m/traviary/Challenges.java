@@ -14,9 +14,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 
+import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.Challenge;
 import cs371m.traviary.datastructures.ChallengesAdapter;
 
@@ -51,6 +53,9 @@ public class Challenges extends Fragment {
     }
 
     private void initializeData() {
+        SQLiteHelper db = new SQLiteHelper(getContext());
+        HashSet<String> states = db.getVisitedStates();
+        HashSet<String> countries = db.getVisitedCountries();
         // name, completed, description, points worth
         challengesTempList = new ArrayList<>();
         Resources resource = getResources();
@@ -58,7 +63,8 @@ public class Challenges extends Fragment {
         String[] challengeDescriptions = resource.getStringArray(R.array.challenge_detail_strings);
         int[] challengePointsWorth = resource.getIntArray(R.array.challenge_worth);
         for (int index = 0; index < challengeNames.length; index++) {
-            challengesTempList.add(new Challenge(index, challengeNames[index], false,
+            challengesTempList.add(new Challenge(index, challengeNames[index],
+                    db.checkChallengeCompleted(index, states, countries),
                     challengeDescriptions[index], challengePointsWorth[index]));
         }
     }

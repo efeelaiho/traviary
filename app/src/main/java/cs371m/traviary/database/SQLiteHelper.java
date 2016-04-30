@@ -202,9 +202,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     /*
      * Since we can access the challenges points worth by int array, check challenges via a switch case
      */
-    private boolean checkChallengeCompleted(int caseNumber) {
-        HashSet<String> states = getVisitedStates();
-        HashSet<String> countries = getVisitedCountries();
+    public boolean checkChallengeCompleted(int caseNumber, HashSet<String> states, HashSet<String> countries) {
         switch(caseNumber) {
             case 0: // Columbia
                 return countries.contains("Columbia");
