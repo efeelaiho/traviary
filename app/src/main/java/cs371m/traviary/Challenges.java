@@ -1,5 +1,6 @@
 package cs371m.traviary;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +46,18 @@ public class Challenges extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
+
+        Resources resource = getResources();
+        final String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent challengeIntent = new Intent(getContext(), ChallengeActivity.class);
+                challengeIntent.putExtra("name", challengeNames[position]);
+                startActivity(challengeIntent);
+            }
+        });
 
         initializeData();
         initializeAdapter();
