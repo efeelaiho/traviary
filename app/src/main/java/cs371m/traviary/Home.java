@@ -46,11 +46,23 @@ public class Home extends Fragment {
             }
         });
 
+        // update points here
+        updatePoints();
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // make sure to recalculate points onResume
+        updatePoints();
+    }
+
+    public void updatePoints() {
         Points points = new Points(getContext());
         System.out.println("STATES POINTS: " + points.getStatesPoints());
         System.out.println("COUNTRIES POINTS: " + points.getCountriesPoints());
         System.out.println("CHALLENGES POINTS: " + points.getChallengesPoints());
         System.out.println("TOTAL POINTS: " + points.getTotalPoints());
-        return v;
     }
 }
