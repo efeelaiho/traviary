@@ -12,7 +12,6 @@ import android.widget.Button;
 public class CountryActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
-    private Button wikipedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

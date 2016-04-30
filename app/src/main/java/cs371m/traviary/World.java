@@ -85,6 +85,7 @@ public class World extends Fragment {
             countryTempList.add(new Country(countryWithSpace, visited, resId));
         }
         db.close();
+        System.out.println(countryTempList.size());
     }
 
     private void initializeAdapter(){

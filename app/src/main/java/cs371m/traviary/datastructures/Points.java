@@ -19,6 +19,8 @@ public class Points {
     private int countriesPoints;
     private int challengesPoints;
     private Context context;
+    private HashSet<String> states;
+    private HashSet<String> countries;
 
     /*
      * Points constructor
@@ -27,9 +29,19 @@ public class Points {
     public Points(Context context) {
         this.context = context;
         db = new SQLiteHelper(this.context);
+        states = db.getVisitedStates();
+        countries = db.getVisitedCountries();
         this.statesPoints = calculateStatesPoints(db);
         this.countriesPoints = calculateCountriesPoints(db);
         this.challengesPoints = calculateChallengesPoints(db);
+    }
+
+    public HashSet<String> getStates() {
+        return this.states;
+    }
+
+    public HashSet<String> getCountries() {
+        return this.countries;
     }
 
     /*
@@ -39,8 +51,6 @@ public class Points {
         Resources resource = this.context.getResources();
         int[] challengePointsWorth = resource.getIntArray(R.array.challenge_worth);
         int total = 0;
-        HashSet<String> states = db.getVisitedStates();
-        HashSet<String> countries = db.getVisitedCountries();
         for (int caseNumber = 0; caseNumber < challengePointsWorth.length; caseNumber++) {
             if (db.checkChallengeCompleted(caseNumber, states, countries)) {
                 total += challengePointsWorth[caseNumber];
