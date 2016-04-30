@@ -36,6 +36,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DELETE_COUNTRIES =
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
 
+    private static final String SELECT_STATES =
+            "SELECT * FROM " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME;
+    private static final String SELECT_COUNTRIES =
+            "SELECT * FROM " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
+
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -175,6 +180,60 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
         db.close();
         return visitedCountries;
+    }
+
+    public int getNumStates() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(SELECT_STATES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+    public int getNumCountries() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(SELECT_COUNTRIES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+
+    /*
+     * Since we can access the challenges points worth by int array, check challenges via a switch case
+     */
+    public boolean checkChallengeCompleted(int caseNumber, HashSet<String> states, HashSet<String> countries) {
+        switch(caseNumber) {
+            case 0: // Columbia
+                return countries.contains("Columbia");
+            case 1: // All 50 states
+                return states.size() == 50;
+            case 2: // Secret: North Korea
+                return countries.contains("North Korea");
+            case 4: // South Korea
+                return countries.contains("South Korea");
+            case 5: // Hello World
+                return countries.size() == 1 || states.size() == 1;
+            case 6: // Ireland
+                return countries.contains("Ireland");
+            case 7: // Texas
+                return states.contains("Texas");
+            case 8: // California
+                return states.contains("California");
+            case 9: // Australia
+                return countries.contains("Australia");
+            case 10: // New York
+                return states.contains("New York");
+            case 11: // Japan
+                return countries.contains("Japan");
+            case 12: // France
+                return countries.contains("France");
+            case 13: // China
+                return countries.contains("China");
+            case 14: // MOTHER RUSSIA
+                return countries.contains("Russia");
+        }
+        return false;
     }
 
 }

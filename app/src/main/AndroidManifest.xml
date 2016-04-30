@@ -62,7 +62,11 @@
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".StateActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ChallengeActivity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".LocationViewer"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".CountryActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 

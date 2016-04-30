@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 
+import cs371m.traviary.datastructures.Points;
+
 
 /**
  * Created by efosaelaiho on 3/25/16.
@@ -43,6 +45,12 @@ public class Home extends Fragment {
                 // I guess it will launch Google places API
             }
         });
+
+        Points points = new Points(getContext());
+        System.out.println("STATES POINTS: " + points.getStatesPoints());
+        System.out.println("COUNTRIES POINTS: " + points.getCountriesPoints());
+        System.out.println("CHALLENGES POINTS: " + points.getChallengesPoints());
+        System.out.println("TOTAL POINTS: " + points.getTotalPoints());
         return v;
     }
 }

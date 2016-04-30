@@ -52,10 +52,15 @@
         <item>Deep in the Heart of ...</item>
         <item>Daisy Dukes, Bikinis on Top</item>
         <item>Going Down Under</item>
+        <!-- -->
         <item>Concrete Jungle</item>
+        <!-- Efe likes Japan -->
         <item>Konnichiwa</item>
+        <!-- France -->
         <item>Eiffel Tower</item>
+        <!-- China -->
         <item>The Great Wall</item>
+        <!-- self-explanatory -->
         <item>Mother Russia</item>
 
     </string-array>
@@ -76,8 +81,26 @@
         <item>Log In France</item>
         <item>Log In China</item>
         <item>Log In Russia</item>
-
     </string-array>
+    
+    <integer-array name="challenge_worth">
+        <item>2000</item>
+        <item>25000</item>
+        <item>100000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>200</item>
+        <item>200</item>
+        <item>2000</item>
+        <item>200</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+        <item>2000</item>
+
+    </integer-array>
 
 
     <!--    Permissions    -->

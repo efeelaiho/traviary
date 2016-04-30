@@ -1,5 +1,6 @@
 package cs371m.traviary;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +43,14 @@ public class World extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
-        // TODO: 4/28/2016 start country intent here
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent countryIntent = new Intent(getContext(), CountryActivity.class);
+                countryIntent.putExtra("name", countryNames[position]);
+                startActivity(countryIntent);
+            }
+        });
         
         initializeData();
         initializeAdapter();

@@ -5,15 +5,19 @@ package cs371m.traviary.datastructures;
  */
 public class Challenge {
 
+    public int challengeNumber;
     public String name;
     public boolean completed;
     public String description;
+    public int pointsWorth;
 
-    public Challenge(String name, boolean completed, String description) {
+    public Challenge(int challengeNumber, String name, boolean completed, String description, int pointsWorth) {
 
+        this.challengeNumber = challengeNumber;
         this.name = name;
         this.completed = completed;
         this.description = description;
+        this.pointsWorth = pointsWorth;
 
     }
 

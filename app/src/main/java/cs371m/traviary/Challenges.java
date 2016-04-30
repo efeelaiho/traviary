@@ -1,5 +1,6 @@
 package cs371m.traviary;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 
+import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.Challenge;
 import cs371m.traviary.datastructures.ChallengesAdapter;
 
@@ -44,6 +47,18 @@ public class Challenges extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
+        Resources resource = getResources();
+        final String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent challengeIntent = new Intent(getContext(), ChallengeActivity.class);
+                challengeIntent.putExtra("name", challengeNames[position]);
+                startActivity(challengeIntent);
+            }
+        });
+
         initializeData();
         initializeAdapter();
 
@@ -51,18 +66,32 @@ public class Challenges extends Fragment {
     }
 
     private void initializeData() {
-
-        challengesTempList = new ArrayList<Challenge>();
+        SQLiteHelper db = new SQLiteHelper(getContext());
+        HashSet<String> states = db.getVisitedStates();
+        HashSet<String> countries = db.getVisitedCountries();
+        // name, completed, description, points worth
+        challengesTempList = new ArrayList<>();
         Resources resource = getResources();
         String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
-        for (String challenge : challengeNames) {
-            challengesTempList.add(new Challenge(challenge, false, ""));
+        String[] challengeDescriptions = resource.getStringArray(R.array.challenge_detail_strings);
+        int[] challengePointsWorth = resource.getIntArray(R.array.challenge_worth);
+        for (int index = 0; index < challengeNames.length; index++) {
+            challengesTempList.add(new Challenge(index, challengeNames[index],
+                    db.checkChallengeCompleted(index, states, countries),
+                    challengeDescriptions[index], challengePointsWorth[index]));
         }
     }
 
     private void initializeAdapter() {
         ChallengesAdapter adapter = new ChallengesAdapter(challengesTempList, getContext());
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeData();
+        initializeAdapter();
     }
 
 }
