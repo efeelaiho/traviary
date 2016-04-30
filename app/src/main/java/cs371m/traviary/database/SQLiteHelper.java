@@ -203,35 +203,37 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Since we can access the challenges points worth by int array, check challenges via a switch case
      */
     private boolean checkChallengeCompleted(int caseNumber) {
+        HashSet<String> states = getVisitedStates();
+        HashSet<String> countries = getVisitedCountries();
         switch(caseNumber) {
             case 0: // Columbia
-                break;
+                return countries.contains("Columbia");
             case 1: // All 50 states
-                break;
+                return states.size() == 50;
             case 2: // Secret: North Korea
-                break;
+                return countries.contains("North Korea");
             case 4: // South Korea
-                break;
+                return countries.contains("South Korea");
             case 5: // Hello World
-                break;
+                return countries.size() == 1 || states.size() == 1;
             case 6: // Ireland
-                break;
+                return countries.contains("Ireland");
             case 7: // Texas
-                break;
+                return states.contains("Texas");
             case 8: // California
-                break;
+                return states.contains("California");
             case 9: // Australia
-                break;
+                return countries.contains("Australia");
             case 10: // New York
-                break;
+                return states.contains("New York");
             case 11: // Japan
-                break;
+                return countries.contains("Japan");
             case 12: // France
-                break;
+                return countries.contains("France");
             case 13: // China
-                break;
+                return countries.contains("China");
             case 14: // MOTHER RUSSIA
-                break;
+                return countries.contains("Russia");
         }
         return false;
     }
