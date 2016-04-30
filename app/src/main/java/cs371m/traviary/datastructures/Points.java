@@ -1,6 +1,7 @@
 package cs371m.traviary.datastructures;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import cs371m.traviary.database.SQLiteHelper;
 
@@ -19,10 +20,24 @@ public class Points {
      * Param: context
      */
     protected Points(Context context) {
-        this.statesPoints = 0;
-        this.countriesPoints = 0;
-        this.challengesPoints = 0;
         db = new SQLiteHelper(context);
+        this.statesPoints = calculateStatesPoints(db);
+        this.countriesPoints = calculateCountriesPoints(db);
+        this.challengesPoints = 0;
+    }
+
+    /*
+     * Helper method to calculate user's countries points
+     */
+    private int calculateCountriesPoints(SQLiteHelper db) {
+        return db.getNumCountries() * 1000; // countries are worth 1000 points each
+    }
+
+    /*
+     * Helper method to calculate user's states points
+     */
+    private int calculateStatesPoints(SQLiteHelper db) {
+        return db.getNumStates() * 100; // states are worth 100 points each
     }
 
     /*

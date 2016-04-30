@@ -36,6 +36,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DELETE_COUNTRIES =
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
 
+    private static final String SELECT_STATES =
+            "SELECT * FROM " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME;
+    private static final String SELECT_COUNTRIES =
+            "SELECT * FROM " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
+
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -175,6 +180,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
         db.close();
         return visitedCountries;
+    }
+
+    public int getNumStates() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(SELECT_STATES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+    public int getNumCountries() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(SELECT_COUNTRIES, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
     }
 
 }
