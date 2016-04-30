@@ -1,8 +1,12 @@
 package cs371m.traviary.datastructures;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.HashSet;
+
+import cs371m.traviary.R;
 import cs371m.traviary.database.SQLiteHelper;
 
 /**
@@ -14,16 +18,35 @@ public class Points {
     private int statesPoints;
     private int countriesPoints;
     private int challengesPoints;
+    private Context context;
 
     /*
      * Points constructor
      * Param: context
      */
     public Points(Context context) {
-        db = new SQLiteHelper(context);
+        this.context = context;
+        db = new SQLiteHelper(this.context);
         this.statesPoints = calculateStatesPoints(db);
         this.countriesPoints = calculateCountriesPoints(db);
-        this.challengesPoints = 0;
+        this.challengesPoints = calculateChallengesPoints(db);
+    }
+
+    /*
+     * Helper method to calculate user's challenges points
+     */
+    public int calculateChallengesPoints(SQLiteHelper db) {
+        Resources resource = this.context.getResources();
+        int[] challengePointsWorth = resource.getIntArray(R.array.challenge_worth);
+        int total = 0;
+        HashSet<String> states = db.getVisitedStates();
+        HashSet<String> countries = db.getVisitedCountries();
+        for (int caseNumber = 0; caseNumber < challengePointsWorth.length; caseNumber++) {
+            if (db.checkChallengeCompleted(caseNumber, states, countries)) {
+                total += challengePointsWorth[caseNumber];
+            }
+        }
+        return total;
     }
 
     /*

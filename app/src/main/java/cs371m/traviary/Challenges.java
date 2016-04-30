@@ -74,4 +74,11 @@ public class Challenges extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializeData();
+        initializeAdapter();
+    }
+
 }
