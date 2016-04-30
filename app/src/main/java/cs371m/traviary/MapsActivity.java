@@ -45,8 +45,6 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
 
     private GoogleMap mMap;
 
-    private Button backButton;
-
     private SupportMapFragment mapFragment;
     private GoogleApiClient googleApiClient;
 
@@ -60,8 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        backButton = (Button) findViewById(R.id.back_button);
 
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= Build.VERSION_CODES.M){
@@ -88,14 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
             googleApiClient = new GoogleApiClient.Builder(this, this, this).addApi(LocationServices.API).build();
         }
         googleApiClient.connect();
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
-                MapsActivity.this.startActivity(intent);
-            }
-        });
 
     }
 

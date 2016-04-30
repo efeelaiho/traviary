@@ -12,19 +12,4 @@
         android:layout_height="match_parent"
         tools:context="cs371m.traviary.MapsActivity" />
 
-    <Button
-        android:id="@+id/back_button"
-        android:text="Back"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/location_button_design"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        />
-
 </FrameLayout>
