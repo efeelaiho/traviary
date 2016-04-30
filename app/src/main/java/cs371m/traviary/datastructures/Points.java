@@ -19,7 +19,7 @@ public class Points {
      * Points constructor
      * Param: context
      */
-    protected Points(Context context) {
+    public Points(Context context) {
         db = new SQLiteHelper(context);
         this.statesPoints = calculateStatesPoints(db);
         this.countriesPoints = calculateCountriesPoints(db);
@@ -29,14 +29,14 @@ public class Points {
     /*
      * Helper method to calculate user's countries points
      */
-    private int calculateCountriesPoints(SQLiteHelper db) {
+    public int calculateCountriesPoints(SQLiteHelper db) {
         return db.getNumCountries() * 1000; // countries are worth 1000 points each
     }
 
     /*
      * Helper method to calculate user's states points
      */
-    private int calculateStatesPoints(SQLiteHelper db) {
+    public int calculateStatesPoints(SQLiteHelper db) {
         return db.getNumStates() * 100; // states are worth 100 points each
     }
 
@@ -44,7 +44,7 @@ public class Points {
      * Get states points
      * Each state is worth 100 points
      */
-    protected int getStatesPoints() {
+    public int getStatesPoints() {
         return this.statesPoints;
     }
 
@@ -52,7 +52,7 @@ public class Points {
      * Get countries points
      * Each country is worth 1000 points
      */
-    protected int getCountriesPoints() {
+    public int getCountriesPoints() {
         return this.countriesPoints;
     }
 
@@ -61,14 +61,14 @@ public class Points {
      * Each challenges are worth:
      *
      */
-    protected int getChallengesPoints() {
+    public int getChallengesPoints() {
         return this.challengesPoints;
     }
 
     /*
      * Get states points + countries points + challenges points
      */
-    protected int getTotalPoints() {
+    public int getTotalPoints() {
         return this.statesPoints + this.countriesPoints + this.challengesPoints;
     }
 
