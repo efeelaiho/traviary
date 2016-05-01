@@ -42,8 +42,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String CREATE_IMAGES =
             "CREATE TABLE " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
-                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + TEXT_TYPE + COMMA +
+                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + "BLOB" + COMMA +
                     FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + TEXT_TYPE +
+                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_US + TEXT_TYPE +
                     ")";
 
     private static final String DELETE_IMAGES =
@@ -105,6 +106,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             return rowInserted;
         }
         return -1;
+    }
+
+    public long insertPhoto(Bitmap imageData, String imageLocation, boolean imageIsUs) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA, getBytes(imageData));
+        contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION, imageLocation);
+        String isUs;
+        if (imageIsUs)
+            isUs = "Y";
+        else
+            isUs = "N";
+        contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_US, isUs);
+        long rowInserted = db.insert(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME, null, contentValues);
+        return rowInserted;
     }
 
     // convert from bitmap to byte array

@@ -39,6 +39,7 @@ public class FeedReaderContract {
         public static final String IMAGES_TABLE_NAME = "images";
         public static final String IMAGES_COLUMN_IMAGE_DATA = "image_data";
         public static final String IMAGES_COLUMN_LOCATION = "image_location";
+        public static final String IMAGES_COLUMN_US = "image_is_us";
 
     }
 
