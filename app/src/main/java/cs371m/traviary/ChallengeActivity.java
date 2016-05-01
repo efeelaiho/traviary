@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Created by jhl2298 on 4/30/2016.
@@ -15,6 +16,9 @@ import android.view.View;
 public class ChallengeActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
+    private TextView challengeDescription;
+    private TextView challengeCompleted;
+    private TextView challengePoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +53,12 @@ public class ChallengeActivity extends ActionBarActivity {
                 onBackPressed();
             }
         });
+
+        challengeDescription = (TextView)findViewById(R.id.challenge_description);
+        challengeCompleted = (TextView)findViewById(R.id.challenge_completed);
+        challengePoints = (TextView) findViewById(R.id.challenge_points);
+        challengeDescription.setText(getIntent().getExtras().getString("description"));
+        challengeCompleted.setText(getIntent().getExtras().getString("completed"));
+        challengePoints.setText(getIntent().getExtras().getString("points"));
     }
 }

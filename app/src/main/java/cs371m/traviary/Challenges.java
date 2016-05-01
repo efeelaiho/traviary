@@ -10,14 +10,10 @@ import android.view.ViewGroup;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.TreeMap;
 
 import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.Challenge;
@@ -39,7 +35,6 @@ public class Challenges extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.challenges,container,false);
-        MainActivity mainActivity = (MainActivity)getActivity();
 
         recyclerView = (RecyclerView) v.findViewById(R.id.challenge_rv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -49,17 +44,20 @@ public class Challenges extends Fragment {
         Resources resource = getResources();
         final String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
 
+        initializeData();
+        initializeAdapter();
+
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent challengeIntent = new Intent(getContext(), ChallengeActivity.class);
                 challengeIntent.putExtra("name", challengeNames[position]);
+                challengeIntent.putExtra("description", challengesTempList.get(position).description);
+                challengeIntent.putExtra("completed", String.valueOf(challengesTempList.get(position).completed));
+                challengeIntent.putExtra("points", Integer.toString(challengesTempList.get(position).pointsWorth));
                 startActivity(challengeIntent);
             }
         });
-
-        initializeData();
-        initializeAdapter();
 
         return v;
     }
