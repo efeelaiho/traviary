@@ -37,16 +37,9 @@ public class FeedReaderContract {
          * Images SQL schema
          */
         public static final String IMAGES_TABLE_NAME = "images";
-        public static final String IMAGES_COLUMN_IMAGE_NAME = "image_name";
         public static final String IMAGES_COLUMN_IMAGE_DATA = "image_data";
+        public static final String IMAGES_COLUMN_LOCATION = "image_location";
 
-        /*
-         *
-         * Blogs SQL schema
-         */
-        public static final String BLOGS_TABLE_NAME = "blogs";
-        public static final String BLOGS_COLUMN_BLOG_NAME = "blog_name";
-        public static final String BLOGS_COLUMN_BLOG_CONTENT = "blog_content";
     }
 
 }
