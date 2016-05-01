@@ -103,28 +103,7 @@
     </integer-array>
 
     <string-array name="image_ids">
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
-        <item>@drawable/_nigeria</item>
+
     </string-array>
 
 

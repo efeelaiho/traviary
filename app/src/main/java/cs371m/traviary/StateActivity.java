@@ -39,6 +39,8 @@ public class StateActivity extends ActionBarActivity {
 
     String imgDecodableString;
 
+    ArrayList<ImageItem> images;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,13 +116,9 @@ public class StateActivity extends ActionBarActivity {
 
     // Prepare some dummy data for gridview
     private ArrayList<ImageItem> getData() {
-        final ArrayList<ImageItem> imageItems = new ArrayList<>();
-        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
-        for (int i = 0; i < imgs.length(); i++) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
-            imageItems.add(new ImageItem(bitmap, "Image#" + i));
-        }
-        return imageItems;
+        images = new ArrayList<>();
+        // connect to SQL here
+        return images;
     }
 
     @Override
@@ -144,20 +142,16 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.image_at_state);
-                // Set the Image in ImageView after decoding the String
-                imgView.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
-
+                images.add(new ImageItem(BitmapFactory.decodeFile(imgDecodableString)));
+                gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG)
                     .show();
         }
 
     }
-
 }
