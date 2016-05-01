@@ -30,6 +30,8 @@ public class StateActivity extends ActionBarActivity {
 
     private Button cameraButton;
 
+    private static int RESULT_LOAD_IMAGE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +70,15 @@ public class StateActivity extends ActionBarActivity {
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ACCESS USER's CAMERA
-                // UPLOAD PIC HERE
-                System.out.println("CAMERA PRESSED");
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
             }
         });
 
-        wikipedia = (Button) findViewById(R.id.wikipedia);
-        wikipedia.setText(stateName + " Wikipedia");
+        wikipedia = (Button) toolbar.findViewById(R.id.wikipedia_button);
         wikipedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,14 +7,10 @@
         android:id="@+id/state_tool_bar"
         layout="@layout/state_tool_bar"
         ></include>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <GridView
             android:id="@+id/grid_view"
             android:layout_width="match_parent"
-            android:layout_height="467dp"
+            android:layout_height="wrap_content"
             android:columnWidth="100dp"
             android:drawSelectorOnTop="true"
             android:gravity="center"
@@ -25,25 +21,5 @@
             android:clickable="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_below="@+id/tool_bar"
-            android:layout_above="@+id/wikipedia" />
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Wikipedia"
-        android:textColor="#FFFFFF"
-        android:id="@+id/wikipedia"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/location_button_design"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/tool_bar" />
 </LinearLayout>

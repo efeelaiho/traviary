@@ -15,4 +15,12 @@
         android:showAsAction="ifRoom"
         android:id="@+id/camera_button"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wikipedia"
+        android:layout_gravity="right"
+        android:showAsAction="ifRoom"
+        android:id="@+id/wikipedia_button"/>
+
 </android.support.v7.widget.Toolbar>
