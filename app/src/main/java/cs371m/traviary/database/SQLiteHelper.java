@@ -36,10 +36,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DELETE_COUNTRIES =
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
 
+    private static final String CREATE_IMAGES =
+            "CREATE TABLE " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME + " (" +
+                    FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
+                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + TEXT_TYPE + COMMA +
+                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + TEXT_TYPE +
+                    ")";
+
+    private static final String DELETE_IMAGES =
+            "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME;
+
     private static final String SELECT_STATES =
             "SELECT * FROM " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME;
     private static final String SELECT_COUNTRIES =
             "SELECT * FROM " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
+    private static final String SELECT_IMAGES =
+            "SELECT * FROM " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME;
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -48,6 +60,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_STATES);
         db.execSQL(CREATE_COUNTRIES);
+        db.execSQL(CREATE_IMAGES);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,6 +68,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // to simply to discard the data and start over
         db.execSQL(DELETE_STATES);
         db.execSQL(DELETE_COUNTRIES);
+        db.execSQL(DELETE_IMAGES);
         onCreate(db);
     }
 
