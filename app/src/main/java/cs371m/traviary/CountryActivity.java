@@ -1,5 +1,6 @@
 package cs371m.traviary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,9 @@ import android.widget.Button;
 public class CountryActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
+    private Button cameraButton;
+
+    private static int RESULT_LOAD_IMAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class CountryActivity extends ActionBarActivity {
         }
 
         /* Display the state name on the toolbar */
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbar = (Toolbar) findViewById(R.id.country_tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(countryName);
 
@@ -43,6 +47,18 @@ public class CountryActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        cameraButton = (Button) toolbar.findViewById(R.id.camera_button);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
             }
         });
     }
