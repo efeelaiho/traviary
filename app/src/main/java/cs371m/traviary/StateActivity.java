@@ -47,7 +47,7 @@ public class StateActivity extends ActionBarActivity {
         }
 
         /* Display the state name on the toolbar */
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        toolbar = (Toolbar) findViewById(R.id.state_tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(stateName);
 
