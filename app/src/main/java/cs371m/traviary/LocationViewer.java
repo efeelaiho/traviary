@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,8 @@ public class LocationViewer extends ActionBarActivity {
     private WebView webview;
     private String locationBeingViewed;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,22 @@ public class LocationViewer extends ActionBarActivity {
         else {
             locationBeingViewed = (String) savedInstanceState.getSerializable("name");
         }
+
+        /* Display the state name on the toolbar */
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(locationBeingViewed + " Wikipedia");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         pDialog = ProgressDialog.show(LocationViewer.this, "", "Please wait while the Wikipedia page for " + locationBeingViewed + " loads...", true);
         webview = (WebView) findViewById(R.id.webview);
