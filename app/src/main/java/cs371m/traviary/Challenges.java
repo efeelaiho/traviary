@@ -39,7 +39,6 @@ public class Challenges extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.challenges,container,false);
-        MainActivity mainActivity = (MainActivity)getActivity();
 
         recyclerView = (RecyclerView) v.findViewById(R.id.challenge_rv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -49,6 +48,9 @@ public class Challenges extends Fragment {
         Resources resource = getResources();
         final String[] challengeNames = resource.getStringArray(R.array.challenge_strings);
 
+        initializeData();
+        initializeAdapter();
+
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -57,9 +59,6 @@ public class Challenges extends Fragment {
                 startActivity(challengeIntent);
             }
         });
-
-        initializeData();
-        initializeAdapter();
 
         return v;
     }
