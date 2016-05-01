@@ -9,7 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
+
+import cs371m.traviary.datastructures.ImageItem;
 
 /**
  * Created by Jong Hoon Lim on 3/30/2016.
@@ -121,6 +124,34 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_US, isUs);
         long rowInserted = db.insert(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME, null, contentValues);
         return rowInserted;
+    }
+
+    public ArrayList<ImageItem> getLocationPhotos(String location) {
+        ArrayList<ImageItem> images = new ArrayList<>();
+        Cursor c = null;
+        SQLiteDatabase db = null;
+        try {
+            db = this.getReadableDatabase();
+            String query = "select * from " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME +
+                    " where " + FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + " = ?";
+            c = db.rawQuery(query, new String[] {location});
+            if (c.moveToFirst() ){
+                String[] columnNames = c.getColumnNames();
+                do {
+                    byte[] bytes = c.getBlob(1);
+                    images.add(new ImageItem(getImage(bytes)));
+                } while (c.moveToNext());
+            }
+        }
+        finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return images;
     }
 
     // convert from bitmap to byte array
