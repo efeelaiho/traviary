@@ -1,5 +1,6 @@
 package cs371m.traviary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -54,9 +55,8 @@ public class StateActivity extends ActionBarActivity {
                 stateName = null;
             else
                 stateName = extras.getString("name");
-        }
-        else {
-            stateName= (String) savedInstanceState.getSerializable("name");
+        } else {
+            stateName = (String) savedInstanceState.getSerializable("name");
         }
 
         /* Display the state name on the toolbar */
@@ -131,7 +131,7 @@ public class StateActivity extends ActionBarActivity {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
                 // Get the cursor
                 Cursor cursor = getContentResolver().query(selectedImage,
@@ -142,7 +142,7 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                images.add(new ImageItem(BitmapFactory.decodeFile(imgDecodableString)));
+                images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
@@ -152,6 +152,17 @@ public class StateActivity extends ActionBarActivity {
             Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
 
+    public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
+
+        final float densityMultiplier = context.getResources().getDisplayMetrics().density;
+
+        int h = (int) (newHeight * densityMultiplier);
+        int w = (int) (h * photo.getWidth() / ((double) photo.getHeight()));
+
+        photo = Bitmap.createScaledBitmap(photo, w, h, true);
+
+        return photo;
     }
 }
