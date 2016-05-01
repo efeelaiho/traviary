@@ -1,5 +1,7 @@
 package cs371m.traviary;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -7,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.GridViewAdapter;
 import cs371m.traviary.datastructures.ImageItem;
 
@@ -42,13 +46,14 @@ public class StateActivity extends ActionBarActivity {
 
     ArrayList<ImageItem> images;
 
+    ProgressDialog pDialog;
+    String stateName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.state);
 
-        // get current state name
-        final String stateName;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null)
@@ -142,6 +147,8 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
+                new InsertImage(StateActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
+                        100, getApplicationContext()), stateName, true).execute();
                 images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
@@ -164,5 +171,56 @@ public class StateActivity extends ActionBarActivity {
         photo = Bitmap.createScaledBitmap(photo, w, h, true);
 
         return photo;
+    }
+
+    private class InsertImage extends AsyncTask<String, String, Long> {
+
+        Context context;
+        Bitmap imageData;
+        String location;
+        boolean isUs;
+
+        public InsertImage(Context context, Bitmap imageData, String location, boolean isUs) {
+            this.context = context;
+            this.imageData = imageData;
+            this.location = location;
+            this.isUs = isUs;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(StateActivity.this);
+            StringBuilder message = new StringBuilder("Attempting to save your image...");
+            pDialog.setMessage(message);
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Long doInBackground(String... params) {
+            SQLiteHelper db = new SQLiteHelper(context);
+            return db.insertPhoto(this.imageData, this.location, this.isUs);
+        }
+
+        @Override
+        protected void onPostExecute(Long success) {
+            super.onPostExecute(success);
+            if (success == -1) {
+                new AlertDialog.Builder(this.context)
+                        .setTitle("")
+                        .setMessage("We could not save your image.")
+                        .setNeutralButton("Close", null)
+                        .show();
+            } else {
+                new AlertDialog.Builder(this.context)
+                        .setTitle("")
+                        .setMessage("You have successfully saved a image for " + location + ".")
+                        .setNeutralButton("Close", null)
+                        .show();
+            }
+        }
+
     }
 }

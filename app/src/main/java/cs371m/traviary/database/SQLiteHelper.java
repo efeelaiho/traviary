@@ -136,7 +136,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     " where " + FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + " = ?";
             c = db.rawQuery(query, new String[] {location});
             if (c.moveToFirst() ){
-                String[] columnNames = c.getColumnNames();
                 do {
                     byte[] bytes = c.getBlob(1);
                     images.add(new ImageItem(getImage(bytes)));
