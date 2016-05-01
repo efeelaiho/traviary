@@ -58,7 +58,12 @@ public class ChallengeActivity extends ActionBarActivity {
         challengeCompleted = (TextView)findViewById(R.id.challenge_completed);
         challengePoints = (TextView) findViewById(R.id.challenge_points);
         challengeDescription.setText(getIntent().getExtras().getString("description"));
-        challengeCompleted.setText(getIntent().getExtras().getString("completed"));
+        String completed;
+        if (getIntent().getExtras().getString("completed").equals("true"))
+            completed = "yes";
+        else
+            completed = "no";
+        challengeCompleted.setText(completed);
         challengePoints.setText(getIntent().getExtras().getString("points"));
     }
 }
