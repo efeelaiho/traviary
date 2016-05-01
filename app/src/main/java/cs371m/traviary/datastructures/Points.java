@@ -2,7 +2,6 @@ package cs371m.traviary.datastructures;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.HashSet;
 

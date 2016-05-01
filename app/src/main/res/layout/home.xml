@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="150sp"
-        android:text="1000"
+        android:text="0"
         android:textSize="120sp"
         android:gravity="center_horizontal"
         android:id="@+id/score"/>
