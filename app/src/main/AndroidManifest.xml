@@ -64,6 +64,8 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".CountryActivity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".DetailsActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

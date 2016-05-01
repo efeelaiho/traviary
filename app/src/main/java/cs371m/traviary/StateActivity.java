@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -76,6 +77,17 @@ public class StateActivity extends ActionBarActivity {
         gridViewAdapter = new GridViewAdapter(this, R.layout.grid_state_item, getData());
         gridView.setAdapter(gridViewAdapter);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                ImageItem item = (ImageItem) parent.getItemAtPosition(position);
+                //Create intent
+                Intent intent = new Intent(StateActivity.this, DetailsActivity.class);
+                intent.putExtra("image", item.getImage());
+
+                //Start details activity
+                startActivity(intent);
+            }
+        });
     }
 
     // Prepare some dummy data for gridview
