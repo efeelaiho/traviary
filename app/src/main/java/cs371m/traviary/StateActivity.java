@@ -28,6 +28,8 @@ public class StateActivity extends ActionBarActivity {
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
 
+    private Button cameraButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,16 @@ public class StateActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        cameraButton = (Button) toolbar.findViewById(R.id.camera_button);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ACCESS USER's CAMERA
+                // UPLOAD PIC HERE
+                System.out.println("CAMERA PRESSED");
             }
         });
 

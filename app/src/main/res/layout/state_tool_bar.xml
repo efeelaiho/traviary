@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/camera"
         android:layout_gravity="right"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"
+        android:id="@+id/camera_button"/>
 
 </android.support.v7.widget.Toolbar>
