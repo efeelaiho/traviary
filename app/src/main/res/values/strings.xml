@@ -102,6 +102,31 @@
 
     </integer-array>
 
+    <string-array name="image_ids">
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+        <item>@drawable/_nigeria</item>
+    </string-array>
+
 
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>

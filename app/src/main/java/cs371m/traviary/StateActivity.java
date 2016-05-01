@@ -1,11 +1,20 @@
 package cs371m.traviary;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
+
+import java.util.ArrayList;
+
+import cs371m.traviary.datastructures.GridViewAdapter;
+import cs371m.traviary.datastructures.ImageItem;
 
 /**
  * Created by jhl2298 on 4/3/2016.
@@ -14,6 +23,9 @@ public class StateActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
     private Button wikipedia;
+
+    private GridView gridView;
+    private GridViewAdapter gridViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +72,21 @@ public class StateActivity extends ActionBarActivity {
             }
         });
 
+        gridView = (GridView) findViewById(R.id.grid_view);
+        gridViewAdapter = new GridViewAdapter(this, R.layout.grid_state_item, getData());
+        gridView.setAdapter(gridViewAdapter);
+
+    }
+
+    // Prepare some dummy data for gridview
+    private ArrayList<ImageItem> getData() {
+        final ArrayList<ImageItem> imageItems = new ArrayList<>();
+        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
+        for (int i = 0; i < imgs.length(); i++) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
+            imageItems.add(new ImageItem(bitmap, "Image#" + i));
+        }
+        return imageItems;
     }
 
 }
