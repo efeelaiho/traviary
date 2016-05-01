@@ -10,14 +10,10 @@ import android.view.ViewGroup;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.TreeMap;
 
 import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.Challenge;
