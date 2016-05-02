@@ -127,6 +127,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return rowInserted;
     }
 
+
+    public long deleteImage(Bitmap imageData) {
+        return -1;
+    }
+
+
     public ArrayList<ImageItem> getLocationPhotos(String location) {
         ArrayList<ImageItem> images = new ArrayList<>();
         Cursor c = null;

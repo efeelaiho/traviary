@@ -123,6 +123,7 @@ public class StateActivity extends ActionBarActivity {
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 new AlertDialog.Builder(StateActivity.this)
                         .setMessage("Delete image?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
