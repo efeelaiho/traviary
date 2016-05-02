@@ -36,6 +36,6 @@ public class Challenge implements Comparator<Challenge>, Comparable<Challenge> {
             return -1;
         if (c2Completed && ! c1Completed)
             return +1;
-        return 0;
+        return this.name.compareTo(another.name);
     }
 }
