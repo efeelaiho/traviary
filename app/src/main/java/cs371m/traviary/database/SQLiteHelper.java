@@ -129,7 +129,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 
     public long deleteImage(Bitmap imageData) {
-        return -1;
+        byte[] bytes = getBytes(imageData);
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME,
+                FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + "=" + bytes, null);
     }
 
 
