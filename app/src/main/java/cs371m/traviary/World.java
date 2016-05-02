@@ -43,17 +43,17 @@ public class World extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
+        initializeData();
+        initializeAdapter();
+
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent countryIntent = new Intent(getContext(), CountryActivity.class);
-                countryIntent.putExtra("name", countryNames[position]);
+                countryIntent.putExtra("name", countryTempList.get(position).name);
                 startActivity(countryIntent);
             }
         });
-        
-        initializeData();
-        initializeAdapter();
 
         return v;
     }

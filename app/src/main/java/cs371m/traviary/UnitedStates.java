@@ -47,17 +47,17 @@ public class UnitedStates extends Fragment {
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
+        initializeData();
+        initializeAdapter();
+
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent stateIntent = new Intent(getContext(), StateActivity.class);
-                stateIntent.putExtra("name", stateNames[position]);
+                stateIntent.putExtra("name", stateTempList.get(position).name);
                 startActivity(stateIntent);
             }
         });
-
-        initializeData();
-        initializeAdapter();
 
         return v;
     }
