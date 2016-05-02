@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
  * Created by jhl2298 on 4/1/2016.
  */
-public class Challenge implements Comparator<Challenge> {
+public class Challenge implements Comparator<Challenge>, Comparable<Challenge> {
 
     public int challengeNumber;
     public String name;
@@ -25,12 +25,17 @@ public class Challenge implements Comparator<Challenge> {
 
     @Override
     public int compare(Challenge c1, Challenge c2) {
-        boolean c1Completed = c1.completed;
-        boolean c2Completed = c2.completed;
+        return c1.compareTo(c2);
+    }
+
+    @Override
+    public int compareTo(Challenge another) {
+        boolean c1Completed = this.completed;
+        boolean c2Completed = another.completed;
         if (c1Completed && ! c2Completed)
-            return +1;
-        if (c2Completed && ! c1Completed)
             return -1;
+        if (c2Completed && ! c1Completed)
+            return +1;
         return 0;
     }
 }
