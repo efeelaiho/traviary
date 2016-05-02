@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -121,7 +122,8 @@ public class StateActivity extends ActionBarActivity {
 
     // Prepare some dummy data for gridview
     private ArrayList<ImageItem> getData() {
-        images = new ArrayList<>();
+        SQLiteHelper db = new SQLiteHelper(this);
+        images = db.getLocationPhotos(stateName);
         // connect to SQL here
         return images;
     }
@@ -147,9 +149,6 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-//                SQLiteHelper db = new SQLiteHelper(this);
-//                db.insertPhoto(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
-//                        100, getApplicationContext()), stateName, true);
                 new InsertImage(StateActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
                         100, getApplicationContext()), stateName, true).execute();
                 images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
@@ -220,7 +219,7 @@ public class StateActivity extends ActionBarActivity {
             } else {
                 new AlertDialog.Builder(this.context)
                         .setTitle("")
-                        .setMessage("You have successfully saved a image for " + location + ".")
+                        .setMessage("You have successfully saved an image for " + location + ".")
                         .setNeutralButton("Close", null)
                         .show();
             }

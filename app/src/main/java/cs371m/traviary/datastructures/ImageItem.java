@@ -9,7 +9,6 @@ public class ImageItem {
     private Bitmap image;
 
     public ImageItem(Bitmap image) {
-        super();
         this.image = image;
     }
 

@@ -138,7 +138,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             c = db.rawQuery(query, new String[] {location});
             if (c.moveToFirst() ){
                 do {
-                    byte[] bytes = c.getBlob(1);
+                    byte[] bytes = c.getBlob(3);
+                    System.out.println(bytes);
                     images.add(new ImageItem(getImage(bytes)));
                 } while (c.moveToNext());
             }
@@ -155,14 +156,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // convert from bitmap to byte array
-    public static byte[] getBytes(Bitmap bitmap) {
+    public byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
         return stream.toByteArray();
     }
 
     // convert from byte array to bitmap
-    public static Bitmap getImage(byte[] image) {
+    public Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
