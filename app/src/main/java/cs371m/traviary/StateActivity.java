@@ -112,7 +112,7 @@ public class StateActivity extends ActionBarActivity {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
                 Intent intent = new Intent(StateActivity.this, DetailsActivity.class);
-                intent.putExtra("image", scaleDownBitmap(item.getImage(), 0, StateActivity.this));
+                intent.putExtra("image", scaleDownBitmap(item.getImage(), 100, StateActivity.this));
 
                 //Start details activity
                 startActivity(intent);

@@ -98,7 +98,7 @@ public class CountryActivity extends ActionBarActivity {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
                 Intent intent = new Intent(CountryActivity.this, DetailsActivity.class);
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("image", scaleDownBitmap(item.getImage(), 100, CountryActivity.this));
 
                 //Start details activity
                 startActivity(intent);
@@ -137,9 +137,8 @@ public class CountryActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                new InsertImage(CountryActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
-                        100, getApplicationContext()), countryName, true).execute();
-                images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
+                new InsertImage(CountryActivity.this, BitmapFactory.decodeFile(imgDecodableString), countryName, true).execute();
+                images.add(new ImageItem(BitmapFactory.decodeFile(imgDecodableString)));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
