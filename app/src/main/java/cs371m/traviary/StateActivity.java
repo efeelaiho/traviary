@@ -119,6 +119,13 @@ public class StateActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("IMAGE LONG CLICKED");
+                return false;
+            }
+        });
     }
 
     // Prepare some dummy data for gridview
