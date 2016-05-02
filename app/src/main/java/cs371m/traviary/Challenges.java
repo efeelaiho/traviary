@@ -52,7 +52,7 @@ public class Challenges extends Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent challengeIntent = new Intent(getContext(), ChallengeActivity.class);
-                challengeIntent.putExtra("name", challengeNames[position]);
+                challengeIntent.putExtra("name", challengesTempList.get(position).name);
                 challengeIntent.putExtra("description", challengesTempList.get(position).description);
                 challengeIntent.putExtra("completed", String.valueOf(challengesTempList.get(position).completed));
                 challengeIntent.putExtra("points", Integer.toString(challengesTempList.get(position).pointsWorth));
