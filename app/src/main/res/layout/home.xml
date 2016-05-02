@@ -43,7 +43,7 @@
         />
 
 
-    <Button
+    <!--<Button
         android:id="@+id/attraction_button"
         android:text="FIND ATTRACTIONS"
         android:textColor="#FFFFFF"
@@ -56,5 +56,12 @@
         android:layout_margin="10dp"
         android:shadowDy="0"
         android:shadowRadius="5"
-        />
+        />-->
+
+    <ImageButton
+        android:id="@+id/info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/info"
+        android:layout_marginTop="90dp"/>
 </LinearLayout>

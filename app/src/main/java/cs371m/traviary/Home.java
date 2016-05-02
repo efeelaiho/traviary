@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -34,6 +35,7 @@ public class Home extends Fragment {
 
     private Button mLocationButton;
     private Button mAttractionButton;
+    private ImageButton info_button;
 
     private TextView score;
     private TextView statesStat;
@@ -60,10 +62,11 @@ public class Home extends Fragment {
         View v = inflater.inflate(R.layout.home, container, false);
         final MainActivity mainActivity = (MainActivity)getActivity();
         mLocationButton = (Button)v.findViewById(R.id.location_button);
-        mAttractionButton = (Button)v.findViewById(R.id.attraction_button);
+        //mAttractionButton = (Button)v.findViewById(R.id.attraction_button);
         score = (TextView) v.findViewById(R.id.score);
         statesStat = (TextView) v.findViewById(R.id.states_stats);
         countriesStats = (TextView) v.findViewById(R.id.country_stats);
+        info_button = (ImageButton)v.findViewById(R.id.info_button);
 
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,12 +75,6 @@ public class Home extends Fragment {
             }
         });
 
-        mAttractionButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                // I guess it will launch Google places API
-            }
-        });
 
         // update points here
         updateStats();
@@ -106,6 +103,15 @@ public class Home extends Fragment {
             }
         });
 
+
+        info_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Welcome to Traviary")
+                        .setNeutralButton("Close", null).show();
+            }
+        });
         return v;
     }
 
