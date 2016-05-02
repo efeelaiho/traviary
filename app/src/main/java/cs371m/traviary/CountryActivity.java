@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import cs371m.traviary.database.SQLiteHelper;
@@ -137,8 +138,15 @@ public class CountryActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                new InsertImage(CountryActivity.this, BitmapFactory.decodeFile(imgDecodableString), countryName, true).execute();
-                images.add(new ImageItem(BitmapFactory.decodeFile(imgDecodableString)));
+                Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
+                byte[] byteArray = getBytes(bitmap);
+                if (byteArray.length > 1040000)
+                    do {
+                        bitmap = scaleDownBitmap(bitmap, 50, CountryActivity.this);
+                        byteArray = getBytes(bitmap);
+                    } while (byteArray.length > 1040000);
+                new InsertImage(CountryActivity.this, bitmap, countryName, true).execute();
+                images.add(new ImageItem(bitmap));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
@@ -148,6 +156,13 @@ public class CountryActivity extends ActionBarActivity {
             Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    // convert from bitmap to byte array
+    public byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
     public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
