@@ -139,7 +139,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             if (c.moveToFirst() ){
                 do {
                     byte[] bytes = c.getBlob(3);
-                    System.out.println(bytes);
+                    images.add(new ImageItem(getImage(bytes)));
+                } while (c.moveToNext());
+            }
+        }
+        finally {
+            if (c != null) {
+                c.close();
+            }
+            if (db != null) {
+                db.close();
+            }
+        }
+        return images;
+    }
+
+    public ArrayList<ImageItem> getUsaPhotos() {
+        ArrayList<ImageItem> images = new ArrayList<>();
+        Cursor c = null;
+        SQLiteDatabase db = null;
+        try {
+            db = this.getReadableDatabase();
+            String query = "select * from " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME +
+                    " where " + FeedReaderContract.FeedEntry.IMAGES_COLUMN_US + " = ?";
+            c = db.rawQuery(query, new String[] {"Y"});
+            if (c.moveToFirst() ){
+                do {
+                    byte[] bytes = c.getBlob(3);
                     images.add(new ImageItem(getImage(bytes)));
                 } while (c.moveToNext());
             }
