@@ -146,7 +146,7 @@ public class CountryActivity extends ActionBarActivity {
                         byteArray = getBytes(bitmap);
                     } while (byteArray.length > 1040000);
                 new InsertImage(CountryActivity.this, bitmap, countryName, true).execute();
-                images.add(new ImageItem(bitmap));
+                images.add(new ImageItem(bitmap, -2));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",

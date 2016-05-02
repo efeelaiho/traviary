@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
  */
 public class ImageItem {
     private Bitmap image;
+    private long id;
 
-    public ImageItem(Bitmap image) {
+    public ImageItem(Bitmap image, long id) {
         this.image = image;
+        this.id = id;
     }
 
     public Bitmap getImage() {
@@ -18,6 +20,14 @@ public class ImageItem {
 
     public void setImage(Bitmap image) {
         this.image = image;
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 }

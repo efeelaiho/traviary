@@ -123,15 +123,24 @@ public class StateActivity extends ActionBarActivity {
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ImageItem item = (ImageItem) parent.getItemAtPosition(position);
+                final ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 new AlertDialog.Builder(StateActivity.this)
                         .setMessage("Delete image?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                SQLiteHelper db = new SQLiteHelper(StateActivity.this);
+                                long result = db.deleteImage(item.getId());
+                                if (result == -1)
+                                    new AlertDialog.Builder(StateActivity.this).
+                                            setNeutralButton("Could not delete your image.", null).show();
+                                else
+                                    new AlertDialog.Builder(StateActivity.this).
+                                            setNeutralButton("Successfully deleted your image.", null).show();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                // DO NOTHING
                             }
                         }).show();
                 return true;
@@ -176,7 +185,7 @@ public class StateActivity extends ActionBarActivity {
                         byteArray = getBytes(bitmap);
                     } while (byteArray.length > 104000);
                 new InsertImage(StateActivity.this, bitmap, stateName, true).execute();
-                images.add(new ImageItem(bitmap));
+                images.add(new ImageItem(bitmap, -2));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",

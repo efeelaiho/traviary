@@ -128,11 +128,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    public long deleteImage(Bitmap imageData) {
-        byte[] bytes = getBytes(imageData);
+    public long deleteImage(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME,
-                FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + "=" + bytes, null);
+        long result = db.delete(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME, FeedReaderContract.FeedEntry._ID + "="+id, null);
+        return result;
     }
 
 
@@ -148,7 +147,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             if (c.moveToFirst() ){
                 do {
                     byte[] bytes = c.getBlob(3);
-                    images.add(new ImageItem(getImage(bytes)));
+                    images.add(new ImageItem(getImage(bytes), c.getLong(0)));
                 } while (c.moveToNext());
             }
         }
@@ -175,7 +174,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             if (c.moveToFirst() ){
                 do {
                     byte[] bytes = c.getBlob(3);
-                    images.add(new ImageItem(getImage(bytes)));
+                    images.add(new ImageItem(getImage(bytes), c.getLong(0)));
                 } while (c.moveToNext());
             }
         }
