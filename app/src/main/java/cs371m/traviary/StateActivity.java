@@ -139,6 +139,7 @@ public class StateActivity extends ActionBarActivity {
                                             setMessage("Successfully deleted your image.").
                                             setNeutralButton("Close", null).show();
                                     getData();
+                                    gridViewAdapter.notifyDataSetChanged();
                                 }
                             }
                         })
