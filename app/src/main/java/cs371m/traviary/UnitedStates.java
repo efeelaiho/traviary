@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -77,6 +78,7 @@ public class UnitedStates extends Fragment {
             }
             stateTempList.add(new State(stateWithSpace, visited, resId));
         }
+        Collections.sort(stateTempList);
         db.close();
     }
 
