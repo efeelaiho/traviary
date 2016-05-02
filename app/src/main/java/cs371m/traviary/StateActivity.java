@@ -132,10 +132,14 @@ public class StateActivity extends ActionBarActivity {
                                 long result = db.deleteImage(item.getId());
                                 if (result == -1)
                                     new AlertDialog.Builder(StateActivity.this).
-                                            setNeutralButton("Could not delete your image.", null).show();
-                                else
+                                            setMessage("Could not delete your image.").
+                                            setNeutralButton("Close", null).show();
+                                else {
                                     new AlertDialog.Builder(StateActivity.this).
-                                            setNeutralButton("Successfully deleted your image.", null).show();
+                                            setMessage("Successfully deleted your image.").
+                                            setNeutralButton("Close", null).show();
+                                    getData();
+                                }
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
