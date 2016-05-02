@@ -60,9 +60,9 @@ public class ChallengeActivity extends ActionBarActivity {
         challengeDescription.setText(getIntent().getExtras().getString("description"));
         String completed;
         if (getIntent().getExtras().getString("completed").equals("true"))
-            completed = "yes";
+            completed = "Yes";
         else
-            completed = "no";
+            completed = "No";
         challengeCompleted.setText(completed);
         challengePoints.setText(getIntent().getExtras().getString("points"));
     }
