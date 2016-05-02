@@ -42,12 +42,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DELETE_COUNTRIES =
             "DROP TABLE IF EXISTS " + FeedReaderContract.FeedEntry.COUNTRIES_TABLE_NAME;
 
+    // create table "images"
     private static final String CREATE_IMAGES =
             "CREATE TABLE " + FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME + " (" +
                     FeedReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
-                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + "BLOB" + COMMA +
-                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + TEXT_TYPE +
+                    FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION + TEXT_TYPE + COMMA +
                     FeedReaderContract.FeedEntry.IMAGES_COLUMN_US + TEXT_TYPE +
+                    COMMA +FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA + " BLOB" +
                     ")";
 
     private static final String DELETE_IMAGES =
@@ -114,7 +115,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public long insertPhoto(Bitmap imageData, String imageLocation, boolean imageIsUs) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA, getBytes(imageData));
         contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_LOCATION, imageLocation);
         String isUs;
         if (imageIsUs)
@@ -122,6 +122,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         else
             isUs = "N";
         contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_US, isUs);
+        contentValues.put(FeedReaderContract.FeedEntry.IMAGES_COLUMN_IMAGE_DATA, getBytes(imageData));
         long rowInserted = db.insert(FeedReaderContract.FeedEntry.IMAGES_TABLE_NAME, null, contentValues);
         return rowInserted;
     }

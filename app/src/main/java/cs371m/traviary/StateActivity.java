@@ -147,6 +147,9 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
+//                SQLiteHelper db = new SQLiteHelper(this);
+//                db.insertPhoto(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
+//                        100, getApplicationContext()), stateName, true);
                 new InsertImage(StateActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
                         100, getApplicationContext()), stateName, true).execute();
                 images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
@@ -207,6 +210,7 @@ public class StateActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Long success) {
             super.onPostExecute(success);
+            pDialog.dismiss();
             if (success == -1) {
                 new AlertDialog.Builder(this.context)
                         .setTitle("")
