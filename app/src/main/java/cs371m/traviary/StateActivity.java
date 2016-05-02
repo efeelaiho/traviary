@@ -112,7 +112,7 @@ public class StateActivity extends ActionBarActivity {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
                 Intent intent = new Intent(StateActivity.this, DetailsActivity.class);
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("image", scaleDownBitmap(item.getImage(), 0, StateActivity.this));
 
                 //Start details activity
                 startActivity(intent);
@@ -149,9 +149,8 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                new InsertImage(StateActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
-                        100, getApplicationContext()), stateName, true).execute();
-                images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
+                new InsertImage(StateActivity.this, BitmapFactory.decodeFile(imgDecodableString), stateName, true).execute();
+                images.add(new ImageItem(BitmapFactory.decodeFile(imgDecodableString)));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
