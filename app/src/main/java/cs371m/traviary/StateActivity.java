@@ -106,7 +106,8 @@ public class StateActivity extends ActionBarActivity {
         });
 
         gridView = (GridView) findViewById(R.id.grid_view);
-        gridViewAdapter = new GridViewAdapter(this, R.layout.grid_state_item, getData());
+        images = getData();
+        gridViewAdapter = new GridViewAdapter(this, R.layout.grid_state_item, images);
         gridView.setAdapter(gridViewAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -138,7 +139,7 @@ public class StateActivity extends ActionBarActivity {
                                     new AlertDialog.Builder(StateActivity.this).
                                             setMessage("Successfully deleted your image.").
                                             setNeutralButton("Close", null).show();
-                                    getData();
+                                    images.remove(item);
                                     gridViewAdapter.notifyDataSetChanged();
                                 }
                             }
