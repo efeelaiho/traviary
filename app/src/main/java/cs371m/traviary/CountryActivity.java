@@ -1,11 +1,14 @@
 package cs371m.traviary;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -16,8 +19,10 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import cs371m.traviary.database.SQLiteHelper;
 import cs371m.traviary.datastructures.GridViewAdapter;
 import cs371m.traviary.datastructures.ImageItem;
 
@@ -38,13 +43,15 @@ public class CountryActivity extends ActionBarActivity {
 
     ArrayList<ImageItem> images;
 
+    ProgressDialog pDialog;
+    String countryName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.country);
 
         // get current state name
-        final String countryName;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null)
@@ -92,7 +99,7 @@ public class CountryActivity extends ActionBarActivity {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
                 Intent intent = new Intent(CountryActivity.this, DetailsActivity.class);
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("image", scaleDownBitmap(item.getImage(), 100, CountryActivity.this));
 
                 //Start details activity
                 startActivity(intent);
@@ -102,8 +109,11 @@ public class CountryActivity extends ActionBarActivity {
 
     // Prepare some dummy data for gridview
     private ArrayList<ImageItem> getData() {
-        images = new ArrayList<>();
+        SQLiteHelper db = new SQLiteHelper(this);
         // connect to SQL here
+        images = db.getLocationPhotos(countryName);
+        if (countryName.equals("United States"))
+            images.addAll(db.getUsaPhotos());
         return images;
     }
 
@@ -128,7 +138,15 @@ public class CountryActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
+                Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
+                byte[] byteArray = getBytes(bitmap);
+                if (byteArray.length > 1040000)
+                    do {
+                        bitmap = scaleDownBitmap(bitmap, 50, CountryActivity.this);
+                        byteArray = getBytes(bitmap);
+                    } while (byteArray.length > 1040000);
+                new InsertImage(CountryActivity.this, bitmap, countryName, true).execute();
+                images.add(new ImageItem(bitmap));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
@@ -138,6 +156,13 @@ public class CountryActivity extends ActionBarActivity {
             Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    // convert from bitmap to byte array
+    public byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
     public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
@@ -150,5 +175,57 @@ public class CountryActivity extends ActionBarActivity {
         photo = Bitmap.createScaledBitmap(photo, w, h, true);
 
         return photo;
+    }
+
+    private class InsertImage extends AsyncTask<String, String, Long> {
+
+        Context context;
+        Bitmap imageData;
+        String location;
+        boolean isUs;
+
+        public InsertImage(Context context, Bitmap imageData, String location, boolean isUs) {
+            this.context = context;
+            this.imageData = imageData;
+            this.location = location;
+            this.isUs = isUs;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(CountryActivity.this);
+            StringBuilder message = new StringBuilder("Attempting to save your image...");
+            pDialog.setMessage(message);
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Long doInBackground(String... params) {
+            SQLiteHelper db = new SQLiteHelper(context);
+            return db.insertPhoto(this.imageData, this.location, this.isUs);
+        }
+
+        @Override
+        protected void onPostExecute(Long success) {
+            super.onPostExecute(success);
+            pDialog.dismiss();
+            if (success == -1) {
+                new AlertDialog.Builder(this.context)
+                        .setTitle("")
+                        .setMessage("We could not save your image.")
+                        .setNeutralButton("Close", null)
+                        .show();
+            } else {
+                new AlertDialog.Builder(this.context)
+                        .setTitle("")
+                        .setMessage("You have successfully saved an image for " + location + ".")
+                        .setNeutralButton("Close", null)
+                        .show();
+            }
+        }
+
     }
 }

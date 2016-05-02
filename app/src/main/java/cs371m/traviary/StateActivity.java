@@ -22,6 +22,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import cs371m.traviary.database.SQLiteHelper;
@@ -112,7 +113,7 @@ public class StateActivity extends ActionBarActivity {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
                 Intent intent = new Intent(StateActivity.this, DetailsActivity.class);
-                intent.putExtra("image", item.getImage());
+                intent.putExtra("image", scaleDownBitmap(item.getImage(), 100, StateActivity.this));
 
                 //Start details activity
                 startActivity(intent);
@@ -149,9 +150,15 @@ public class StateActivity extends ActionBarActivity {
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                new InsertImage(StateActivity.this, scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString),
-                        100, getApplicationContext()), stateName, true).execute();
-                images.add(new ImageItem(scaleDownBitmap(BitmapFactory.decodeFile(imgDecodableString), 100, getApplicationContext())));
+                Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
+                byte[] byteArray = getBytes(bitmap);
+                if (byteArray.length > 1040000)
+                    do {
+                        bitmap = scaleDownBitmap(bitmap, 50, StateActivity.this);
+                        byteArray = getBytes(bitmap);
+                    } while (byteArray.length > 104000);
+                new InsertImage(StateActivity.this, bitmap, stateName, true).execute();
+                images.add(new ImageItem(bitmap));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(this, "You haven't picked an image.",
@@ -161,6 +168,13 @@ public class StateActivity extends ActionBarActivity {
             Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    // convert from bitmap to byte array
+    public byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
     public static Bitmap scaleDownBitmap(Bitmap photo, int newHeight, Context context) {
