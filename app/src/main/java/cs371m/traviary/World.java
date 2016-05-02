@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -84,6 +85,7 @@ public class World extends Fragment {
             }
             countryTempList.add(new Country(countryWithSpace, visited, resId));
         }
+        Collections.sort(countryTempList);
         db.close();
     }
 
