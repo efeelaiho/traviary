@@ -3,6 +3,7 @@ package cs371m.traviary;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -105,6 +106,37 @@ public class CountryActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final ImageItem item = (ImageItem) parent.getItemAtPosition(position);
+                new AlertDialog.Builder(CountryActivity.this)
+                        .setMessage("Delete image?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                SQLiteHelper db = new SQLiteHelper(CountryActivity.this);
+                                long result = db.deleteImage(item.getId());
+                                if (result == -1)
+                                    new AlertDialog.Builder(CountryActivity.this).
+                                            setMessage("Could not delete your image.").
+                                            setNeutralButton("Close", null).show();
+                                else {
+                                    new AlertDialog.Builder(CountryActivity.this).
+                                            setMessage("Successfully deleted your image.").
+                                            setNeutralButton("Close", null).show();
+                                    images.remove(item);
+                                    gridViewAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // DO NOTHING
+                            }
+                        }).show();
+                return true;
+            }
+        });
     }
 
     // Prepare some dummy data for gridview
@@ -145,7 +177,7 @@ public class CountryActivity extends ActionBarActivity {
                         bitmap = scaleDownBitmap(bitmap, 50, CountryActivity.this);
                         byteArray = getBytes(bitmap);
                     } while (byteArray.length > 1040000);
-                new InsertImage(CountryActivity.this, bitmap, countryName, true).execute();
+                new InsertImage(CountryActivity.this, bitmap, countryName, false).execute();
                 images.add(new ImageItem(bitmap, -2));
                 gridViewAdapter.notifyDataSetChanged();
             } else {
