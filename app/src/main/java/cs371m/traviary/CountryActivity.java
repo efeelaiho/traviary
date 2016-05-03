@@ -35,6 +35,8 @@ public class CountryActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private Button cameraButton;
 
+    private Button wikipedia;
+
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
 
@@ -88,6 +90,16 @@ public class CountryActivity extends ActionBarActivity {
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 // Start the Intent
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        wikipedia = (Button) toolbar.findViewById(R.id.wikipedia_button);
+        wikipedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent wikipediaIntent = new Intent(CountryActivity.this, LocationViewer.class);
+                wikipediaIntent.putExtra("name", countryName);
+                startActivity(wikipediaIntent);
             }
         });
 
