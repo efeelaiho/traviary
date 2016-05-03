@@ -81,6 +81,8 @@ public class LocationViewer extends ActionBarActivity {
                 }
             }
         });
+        if (locationBeingViewed.equals("Côte d Ivoire"))
+            locationBeingViewed = "Ivory Coast";
         webview.loadUrl("https://en.wikipedia.org/wiki/" + locationBeingViewed);
 
     }
