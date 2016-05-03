@@ -66,7 +66,7 @@ public class Home extends Fragment {
         score = (TextView) v.findViewById(R.id.score);
         statesStat = (TextView) v.findViewById(R.id.states_stats);
         countriesStats = (TextView) v.findViewById(R.id.country_stats);
-        info_button = (ImageButton)v.findViewById(R.id.info_button);
+//        info_button = (ImageButton)v.findViewById(R.id.info_button);
 
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -104,14 +104,14 @@ public class Home extends Fragment {
         });
 
 
-        info_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Welcome to Traviary")
-                        .setNeutralButton("Close", null).show();
-            }
-        });
+//        info_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(getContext())
+//                        .setTitle("Welcome to Traviary")
+//                        .setNeutralButton("Close", null).show();
+//            }
+//        });
         return v;
     }
 
