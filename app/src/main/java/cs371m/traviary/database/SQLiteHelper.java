@@ -22,6 +22,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA = ", ";
     public static final String DATABASE_NAME = "traviary.db";
+    // create table "cities"
     // create table "states"
     private static final String CREATE_STATES =
             "CREATE TABLE " + FeedReaderContract.FeedEntry.STATES_TABLE_NAME + " (" +

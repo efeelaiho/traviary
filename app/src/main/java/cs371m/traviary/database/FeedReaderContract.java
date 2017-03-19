@@ -20,6 +20,13 @@ public class FeedReaderContract {
      */
     public static abstract class FeedEntry implements BaseColumns {
         /*
+         * Cities SQL schema
+         */
+        public static final String CITIES_TABLE_NAME = "cities";
+        public static final String CITIES_COLUMN_CITY_NAME = "city_name";
+        public static final String CITIES_COLUMN_STATE_NAME = "state_name";
+
+        /*
          * States SQL schema
          */
         public static final String STATES_TABLE_NAME = "states";
