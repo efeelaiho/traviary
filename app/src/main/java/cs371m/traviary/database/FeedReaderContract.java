@@ -25,6 +25,8 @@ public class FeedReaderContract {
         public static final String CITIES_TABLE_NAME = "cities";
         public static final String CITIES_COLUMN_CITY_NAME = "city_name";
         public static final String CITIES_COLUMN_STATE_NAME = "state_name";
+        public static final String CITIES_COLUMN_COUNTRY_NAME = "country_name";
+        public static final String CITIES_COLUMN_FOREIGN = "foreign";
 
         /*
          * States SQL schema
